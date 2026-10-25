@@ -1,0 +1,1055 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Karteikarten für Olga</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap">
+<style>
+/* Layout: one column (max 680px), lesson chips on top, three tabs; the card is a Karteikarte:
+   ruled front with an accent rule under the heading, plain back. */
+:root{
+  --bg:#f3f9ee; --surface:#fcfefa; --surface-2:#e4f1da; --ink:#25311f; --muted:#62725a; --line:#d6e5ca; --rule:#e6f1dd;
+  --accent:#4a7a3a; --on-accent:#ffffff; --accent-text:#35602a; --accent-soft:#d0f0c0; --tea:#d0f0c0; --tea-ink:#27431f;
+  --ok:#2c7a55; --ok-soft:#d9efe3; --bad:#ab362c; --bad-soft:#f7dedb;
+  --shadow:0 1px 0 rgba(37,49,31,.04),0 12px 30px -14px rgba(37,49,31,.28);
+  --font-display:'Bricolage Grotesque',ui-sans-serif,system-ui,sans-serif;
+  --font-body:'Manrope',ui-sans-serif,system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#141b11; --surface:#1d2719; --surface-2:#273322; --ink:#eaf3e3; --muted:#a9bba0; --line:#33432d; --rule:#27341f;
+    --accent:#a6d894; --on-accent:#14200f; --accent-text:#cdeebd; --accent-soft:#2c4326; --tea:#2c4326; --tea-ink:#d0f0c0;
+    --ok:#7fcba0; --ok-soft:#1c3427; --bad:#ec8f84; --bad-soft:#3d2321;
+    --shadow:0 1px 0 rgba(0,0,0,.2),0 14px 30px -14px rgba(0,0,0,.6); color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+    --bg:#141b11; --surface:#1d2719; --surface-2:#273322; --ink:#eaf3e3; --muted:#a9bba0; --line:#33432d; --rule:#27341f;
+    --accent:#a6d894; --on-accent:#14200f; --accent-text:#cdeebd; --accent-soft:#2c4326; --tea:#2c4326; --tea-ink:#d0f0c0;
+    --ok:#7fcba0; --ok-soft:#1c3427; --bad:#ec8f84; --bad-soft:#3d2321;
+    --shadow:0 1px 0 rgba(0,0,0,.2),0 14px 30px -14px rgba(0,0,0,.6); color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font:16px/1.5 var(--font-body);
+  padding-block:10px 56px;
+  padding-left:max(16px,env(safe-area-inset-left,0px));
+  padding-right:max(16px,env(safe-area-inset-right,0px));
+  -webkit-text-size-adjust:100%}
+button,input,select,textarea{font-family:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:2px solid var(--accent-text);outline-offset:2px}
+.wrap{max-width:680px;margin:0 auto}
+.top{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;padding:8px 0 16px}
+.eyebrow{margin:0 0 4px;font-size:12px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;color:var(--accent-text)}
+h1{margin:0;font:500 clamp(36px,10vw,50px)/1 var(--font-display);letter-spacing:-.015em}
+h2{margin:0 0 6px;font:500 24px/1.2 var(--font-display)}
+p{margin:0}
+.muted{color:var(--muted)}
+.ghost{background:transparent;border:1px solid var(--line);color:var(--muted);border-radius:10px;padding:8px 12px;font-size:13px;font-weight:600;min-height:38px}
+.lessons{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
+.chip{font:600 14px/1 var(--font-body);padding:11px 15px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--ink);min-height:42px}
+.chip.on{background:var(--accent-soft);border-color:var(--accent);color:var(--accent-text)}
+.lessons .chip.on{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+.chip small{font-weight:500;opacity:.8;margin-left:4px}
+.tabs{display:flex;border-bottom:1px solid var(--line);margin-bottom:14px}
+.tabs button{flex:1;padding:13px 4px;background:none;border:0;border-bottom:3px solid transparent;font:600 15px var(--font-body);color:var(--muted)}
+.tabs button.on{color:var(--ink);border-bottom-color:var(--accent)}
+.seg{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px}
+.bar{height:6px;border-radius:3px;background:var(--line);overflow:hidden}
+.bar i{display:block;height:100%;background:var(--accent);transition:width .3s}
+.meter{display:flex;align-items:center;gap:12px;margin:14px 0 0}
+.meter .bar{flex:1}
+.count{font-size:14px;color:var(--muted);white-space:nowrap;font-variant-numeric:tabular-nums}
+.count b{font-weight:700}
+.count .k{color:var(--ok)} .count .r{color:var(--accent-text)}
+
+/* card */
+.card3d{perspective:1400px;margin:14px 0;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.inner{display:grid;position:relative;transform-style:preserve-3d;transition:transform .5s cubic-bezier(.3,.7,.2,1);min-height:370px}
+.card3d.flipped .inner{transform:rotateY(180deg)}
+.face{grid-area:1/1;backface-visibility:hidden;-webkit-backface-visibility:hidden;display:flex;flex-direction:column;
+  border:1px solid var(--line);border-radius:14px;background:var(--surface);padding:16px 20px 18px;min-width:0}
+.front{background-image:repeating-linear-gradient(to bottom,transparent 0 33px,var(--rule) 33px 34px);background-position:0 50px}
+.back{transform:rotateY(180deg)}
+.card3d:not(.flipped) .back{pointer-events:none}
+.card3d.flipped .front{pointer-events:none}
+.head{display:flex;justify-content:space-between;align-items:center;min-height:44px;padding-bottom:8px;border-bottom:2px solid var(--accent);background:var(--surface);margin:0 -20px;padding-left:20px;padding-right:14px}
+.tag{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-text)}
+.mid{flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:18px 2px;gap:10px}
+.mid.left{align-items:flex-start;text-align:left}
+.phrase{font:500 clamp(30px,8.5vw,46px)/1.12 var(--font-display);text-wrap:balance;overflow-wrap:anywhere;background:var(--surface);padding:2px 8px;border-radius:6px}
+.phrase.uk{font-style:italic}
+.phrase.sm{font-size:clamp(28px,7.5vw,38px)}
+.hintline{font-size:14px;color:var(--muted);background:var(--surface);padding:0 6px}
+.flipnote{text-align:center;font-size:13px;color:var(--muted);background:var(--surface);align-self:center;padding:0 8px}
+.small{font-size:14px;color:var(--muted)}
+.trans{font:500 clamp(24px,6.5vw,32px)/1.18 var(--font-display);text-wrap:balance}
+.trans.sm{font-size:19px;color:var(--muted);font-style:italic}
+.ex{font-size:17px;line-height:1.7;margin-top:4px}
+.blank{min-width:5.5em;height:1.5em;border:0;border-bottom:2px solid var(--accent);background:var(--accent-soft);color:var(--accent-text);
+  font:inherit;font-weight:700;padding:0 8px;border-radius:5px 5px 0 0;vertical-align:baseline}
+.btnrow{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.sbtn,.icon{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:8px 14px;border-radius:10px;border:1px solid var(--line);
+  background:var(--surface);color:var(--ink);font:600 14px var(--font-body);text-decoration:none}
+.icon{padding:8px 10px;color:var(--accent-text);border-color:transparent;background:transparent}
+.sbtn:hover,.icon:hover{border-color:var(--accent)}
+.acts{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:6px}
+.btn{min-height:56px;border-radius:12px;font:700 16px var(--font-body);border:2px solid var(--accent)}
+.btn.again{background:transparent;color:var(--accent-text)}
+.btn.know{background:var(--accent);color:var(--on-accent)}
+.btn.primary{background:var(--accent);color:var(--on-accent);padding:0 22px}
+.btn.line{background:transparent;color:var(--accent-text);padding:0 22px}
+.kbd{margin-top:10px;font-size:12px;color:var(--muted);text-align:center}
+@media (hover:none){.kbd{display:none}}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:20px}
+.panel + .panel{margin-top:12px}
+.list{list-style:none;margin:12px 0;padding:0;display:grid;gap:8px}
+.list li{display:flex;justify-content:space-between;gap:12px;padding:10px 12px;border-radius:10px;background:var(--accent-soft);font-size:15px}
+.list li span:last-child{color:var(--muted);text-align:right}
+.bigtxt{font:500 28px/1.15 var(--font-display);margin-bottom:6px}
+.actcol{display:grid;gap:10px;margin-top:14px}
+
+/* exercises */
+.exgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media (max-width:420px){.exgrid{grid-template-columns:1fr}}
+.exbtn{text-align:left;padding:16px;border-radius:14px;border:1px solid var(--line);background:var(--surface);min-height:92px;display:flex;flex-direction:column;gap:4px}
+.exbtn:hover{border-color:var(--accent)}
+.exbtn b{font:500 21px/1.15 var(--font-display)}
+.exbtn span{font-size:13px;color:var(--muted)}
+.exhead{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.qcard{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:20px;margin-top:14px}
+.q{font:500 clamp(24px,6.5vw,32px)/1.2 var(--font-display);margin-bottom:14px;text-wrap:balance}
+.q.uk{font-style:italic}
+.opts{display:grid;gap:8px}
+.opt{width:100%;text-align:left;padding:14px 16px;border-radius:10px;border:1.5px solid var(--line);background:var(--surface);font-size:16px;min-height:52px}
+.opt:hover:not(:disabled){border-color:var(--accent)}
+.opt.sel{border-color:var(--accent);background:var(--accent-soft)}
+.opt.ok{border-color:var(--ok);background:var(--ok-soft)}
+.opt.bad{border-color:var(--bad);background:var(--bad-soft)}
+.opt.miss{border-color:var(--ok);background:transparent}
+.exline{font-size:19px;line-height:2}
+.gap,.dic{font:inherit;border:0;border-bottom:2px solid var(--accent);background:var(--accent-soft);padding:2px 8px;border-radius:5px 5px 0 0;text-align:center;max-width:100%;color:var(--ink)}
+.dic{width:100%;text-align:left;font-size:19px;padding:12px}
+.gap.ok,.dic.ok{border-color:var(--ok);background:var(--ok-soft)}
+.gap.bad,.dic.bad{border-color:var(--bad);background:var(--bad-soft)}
+.fb{margin-top:14px;padding:12px 14px;border-radius:10px;font-size:15px}
+.fb.ok{background:var(--ok-soft);color:var(--ink);border-left:0}
+.fb.bad{background:var(--bad-soft)}
+.fb b{font-weight:700}
+.pairs{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.pairs .col{display:grid;gap:10px;align-content:start}
+.pchip{min-height:64px;padding:10px 12px;text-align:left;border-radius:10px;border:1.5px solid var(--line);background:var(--surface);font-size:15px;line-height:1.3;overflow-wrap:anywhere}
+.pchip.de{font-family:var(--font-display);font-size:18px;font-weight:500}
+.pchip.sel{border-color:var(--accent);background:var(--accent-soft)}
+.pchip.done{border-color:var(--ok);background:var(--ok-soft);opacity:.7}
+.pchip.wrong{border-color:var(--bad);background:var(--bad-soft);animation:shake .35s}
+@keyframes shake{25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+.pool{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0;min-height:48px}
+.pill{padding:10px 14px;border-radius:10px;border:1.5px solid var(--line);background:var(--surface);font:500 17px var(--font-display);min-height:44px;text-align:left}
+.pill.sel{border-color:var(--accent);background:var(--accent-soft)}
+.pill.ok{border-color:var(--ok);background:var(--ok-soft)}
+.pill.bad{border-color:var(--bad);background:var(--bad-soft)}
+.pill small{display:block;font:600 11px var(--font-body);color:var(--bad);margin-top:2px}
+.groups{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(210px,1fr))}
+.gbox{border:1.5px solid var(--line);border-radius:12px;padding:12px;min-height:120px;background:var(--surface);text-align:left;display:flex;flex-direction:column;gap:8px;align-items:flex-start;width:100%}
+.gbox.armed{border-color:var(--accent);background:var(--accent-soft)}
+.gbox h3{margin:0;font:700 14px var(--font-body);color:var(--accent-text);letter-spacing:.02em}
+.gbox .pool{margin:0;min-height:0}
+.field{width:100%;min-height:46px;border-radius:10px;border:1.5px solid var(--line);background:var(--surface);padding:10px 12px;font-size:16px}
+textarea.field{min-height:92px;resize:vertical;font-size:14px}
+select.field{appearance:auto}
+.fieldlbl{display:block;font-size:13px;font-weight:600;color:var(--muted);margin:14px 0 6px}
+.note{font-size:14px;color:var(--muted);margin-top:8px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px}
+.stat{background:var(--accent-soft);border-radius:10px;padding:12px;text-align:center}
+.stat b{display:block;font:500 28px/1 var(--font-display);color:var(--accent-text);font-variant-numeric:tabular-nums}
+.stat span{font-size:12px;color:var(--muted)}
+.danger{border-color:var(--bad);color:var(--bad)}
+#toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(18px + env(safe-area-inset-bottom,0px));background:var(--ink);color:var(--bg);
+  padding:10px 16px;border-radius:10px;font-size:14px;font-weight:600;max-width:calc(100vw - 32px);opacity:0;pointer-events:none;transition:opacity .2s;z-index:20}
+#toast.on{opacity:1}
+@media (prefers-reduced-motion:reduce){
+  .inner,.bar i,#toast{transition:none}
+  .pchip.wrong{animation:none}
+}
+
+/* Зелений чай — стиль як у Лізи: заокруглені картки, тінь, сегментні вкладки */
+h1{font-weight:700;font-size:clamp(28px,7vw,40px);line-height:1.05;letter-spacing:0}
+h2,.bigtxt,.trans,.q,.exbtn b,.pchip.de,.pill{font-weight:600}
+.eyebrow{color:var(--muted);letter-spacing:.12em}
+.phrase{font-weight:700;font-size:clamp(26px,6.4vw,40px)}
+.phrase.sm{font-size:clamp(24px,6vw,34px)}
+.phrase.uk,.q.uk,.trans.sm{font-style:normal}
+.tabs{gap:4px;padding:4px;background:var(--surface-2);border:0;border-radius:14px}
+.tabs button{border:0;border-radius:10px;padding:10px 4px;font-weight:700}
+.tabs button.on{background:var(--surface);color:var(--ink);box-shadow:var(--shadow)}
+.chip{font-weight:700;font-size:13px;padding:9px 13px;min-height:38px}
+.lessons .chip.on{background:var(--tea);border-color:var(--accent);color:var(--tea-ink)}
+.face{border-radius:22px;box-shadow:var(--shadow)}
+.front{background-image:none}
+.head{border-bottom:1px dashed var(--line)}
+.panel,.qcard{border-radius:18px;box-shadow:var(--shadow)}
+.bar{background:var(--surface-2)}
+.btn.know,.btn.primary{background:var(--accent);border-color:var(--accent)}
+.btn.again,.btn.line{border-color:var(--line)}
+.blank,.gap,.dic{background:var(--tea);color:var(--tea-ink);border-bottom-color:var(--accent)}
+.opt.sel,.pchip.sel,.pill.sel,.gbox.armed{background:var(--tea);color:var(--tea-ink)}
+.list li{background:var(--surface-2)}
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <div>
+      <p class="eyebrow">Картки фраз · німецька · B2</p>
+      <h1>Olga</h1>
+    </div>
+    <button class="ghost" id="themeBtn" data-act="theme" type="button">Тема: авто</button>
+  </header>
+  <div class="lessons" id="lessons"></div>
+  <nav class="tabs" id="tabs" aria-label="Розділи"></nav>
+  <main id="view"></main>
+</div>
+<div id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(function(){
+'use strict';
+
+/* ================= DATA =================
+   Додавайте нові фрази в кінець CARDS (поле lesson — назва уроку, нова назва = нова кнопка).
+   Поле en містить саму фразу (тут німецьку): за ним зберігається прогрес. */
+const CARDS = [
+ {lesson:'Werkzeuge 1', en:'der Mundspiegel', uk:'стоматологічне дзеркало',
+  ex:'Die Zahnärztin kontrolliert mit dem ___ die Rückseite der Schneidezähne.', ans:'Mundspiegel',
+  col:['den Mundspiegel anwärmen','die Wange mit dem Mundspiegel abhalten'], dict:'Mundspiegel'},
+ {lesson:'Werkzeuge 1', en:'die Sonde', uk:'зонд',
+  ex:'Mit der ___ tastet der Zahnarzt die Zahnoberfläche nach Karies ab.', ans:'Sonde',
+  col:['mit der Sonde abtasten','die Sonde ansetzen'], dict:'Sonde'},
+ {lesson:'Werkzeuge 1', en:'die Häkchensonden', uk:'гачкуваті зонди (з гачком на кінці)',
+  ex:'Auf dem Instrumententablett liegen zwei ___ bereit.', ans:'Häkchensonden',
+  col:['Häkchensonden bereitlegen','mit der Häkchensonde arbeiten'], dict:'Sonde'},
+ {lesson:'Werkzeuge 1', en:'die Messsonde', uk:'вимірювальний (пародонтальний) зонд',
+  ex:'Mit der ___ misst die Dentalhygienikerin die Tiefe der Zahnfleischtaschen.', ans:'Messsonde',
+  col:['die Taschentiefe messen','die Messsonde vorsichtig einführen'], dict:'Messsonde'},
+ {lesson:'Werkzeuge 1', en:'die biegbare Sonde', uk:'гнучкий зонд (його можна зігнути)',
+  ex:'Die ___ Sonde lässt sich an die Form des Wurzelkanals anpassen.', ans:'biegbare',
+  col:['eine biegbare Sonde verwenden','die Sonde biegen'], dict:'biegbar'},
+ {lesson:'Werkzeuge 1', en:'biegen', uk:'згинати',
+  ex:'Man kann die dünne Sonde leicht ___, um schwer erreichbare Stellen zu erreichen.', ans:'biegen',
+  col:['die Spitze biegen','einen Draht biegen'], dict:'biegen'},
+ {lesson:'Werkzeuge 1', en:'die Turbine', uk:'турбінний наконечник (бормашина)',
+  ex:'Mit der ___ trägt der Zahnarzt die kariöse Zahnsubstanz schnell ab.', ans:'Turbine',
+  col:['mit der Turbine bohren','die Turbine mit Wasser kühlen'], dict:'Turbine'},
+ {lesson:'Werkzeuge 1', en:'die Pinzette', uk:'пінцет',
+  ex:'Mit der ___ nimmt der Zahnarzt die Watterolle aus dem Behälter.', ans:'Pinzette',
+  col:['die Pinzette reichen','etwas mit der Pinzette greifen'], dict:'Pinzette'},
+ {lesson:'Werkzeuge 1', en:'der Scaler', uk:'скейлер (для видалення зубного каменю)',
+  ex:'Mit dem ___ entfernt die Prophylaxeassistentin harte Beläge am Zahnfleischrand.', ans:'Scaler',
+  col:['Zahnstein mit dem Scaler entfernen','den Scaler schärfen'], dict:'Scaler'},
+ {lesson:'Werkzeuge 1', en:'die Matrize', uk:'матриця (формує стінку зуба для пломби)',
+  ex:'Vor der Füllung spannt der Zahnarzt eine ___ um den Backenzahn.', ans:'Matrize',
+  col:['eine Matrize anlegen','die Matrize einspannen'], dict:'Matrize'},
+ {lesson:'Werkzeuge 1', en:'die Polierbürste', uk:'щіточка для полірування',
+  ex:'Zum Schluss poliert die Assistentin die Zähne mit der ___ und etwas Polierpaste.', ans:'Polierbürste',
+  col:['mit der Polierbürste polieren','die Polierbürste aufsetzen'], dict:'Polierbürste'},
+ {lesson:'Werkzeuge 1', en:'der Poliergummi', uk:'полірувальна гумка (гумовий полірувальник)',
+  ex:'Mit dem ___ glättet der Zahnarzt die Oberfläche der neuen Füllung.', ans:'Poliergummi',
+  col:['den Poliergummi aufsetzen','eine Füllung mit dem Poliergummi polieren'], dict:'Poliergummi'},
+ {lesson:'Werkzeuge 1', en:'der große Absauger', uk:'великий відсмоктувач (хірургічний)',
+  ex:'Bei der Extraktion hält die Assistentin den großen ___ nahe an die Wunde.', ans:'Absauger',
+  col:['Blut absaugen','den Absauger halten'], dict:'Absauger'},
+ {lesson:'Werkzeuge 1', en:'der Speichelzieher', uk:'слиновідсмоктувач',
+  ex:'Die Assistentin legt dem Patienten den ___ unter die Zunge.', ans:'Speichelzieher',
+  col:['den Speichelzieher platzieren','Speichel absaugen'], dict:'Speichelzieher'},
+ {lesson:'Werkzeuge 1', en:'die Kürette', uk:'кюрета',
+  ex:'Mit der ___ reinigt der Zahnarzt die Wurzeloberfläche unter dem Zahnfleisch.', ans:'Kürette',
+  col:['mit der Kürette arbeiten','die Zahnfleischtasche mit der Kürette reinigen'], dict:'Kürette'},
+ {lesson:'Werkzeuge 1', en:'der Ultraschall', uk:'ультразвук (ультразвуковий скейлер)',
+  ex:'Der ___ löst den Zahnstein mit Vibrationen und Wasser.', ans:'Ultraschall',
+  col:['mit Ultraschall arbeiten','Zahnstein per Ultraschall entfernen'], dict:'Ultraschall'},
+ {lesson:'Werkzeuge 1', en:'der Matrizenspanner', uk:'тримач матриці (ретейнер)',
+  ex:'Mit dem ___ wird die Matrize fest um den Zahn gespannt.', ans:'Matrizenspanner',
+  col:['den Matrizenspanner anziehen','die Matrize im Spanner fixieren'], dict:'Matrizenspanner'},
+ {lesson:'Werkzeuge 1', en:'die Zange', uk:'щипці',
+  ex:'Zum Ziehen des Zahns greift der Zahnarzt zur ___.', ans:'Zange',
+  col:['den Zahn mit der Zange fassen','die Zange ansetzen'], dict:'Zange'},
+
+ /* ---- Redemittel 1: Erklären, Ursachen, Folgen ---- */
+ {lesson:'Redemittel 1', en:'Mit anderen Worten, ...', uk:'Іншими словами, …',
+  ex:'Ihr Zahnfleisch blutet bei jeder Berührung. Mit anderen ___: Es ist entzündet.', ans:'Worten',
+  col:['mit anderen Worten','mit einem Wort'], dict:'Wort'},
+ {lesson:'Redemittel 1', en:'Dadurch kann es zu ... kommen.', uk:'Через це може виникнути (виникнути …).',
+  ex:'Dadurch kann es zu starken Schmerzen ___.', ans:'kommen',
+  col:['zu Entzündungen kommen','zu Komplikationen kommen'], dict:'kommen'},
+ {lesson:'Redemittel 1', en:'Die Ursache dafür ist ...', uk:'Причина цього — …',
+  ex:'Die ___ dafür ist meist eine mangelhafte Mundhygiene.', ans:'Ursache',
+  col:['die Ursache finden','die Ursache beheben'], dict:'Ursache'},
+ {lesson:'Redemittel 1', en:'In Ihrem Fall bedeutet das, dass ...', uk:'У вашому випадку це означає, що …',
+  ex:'In Ihrem ___ bedeutet das, dass wir den Zahn überkronen müssen.', ans:'Fall',
+  col:['in diesem Fall','in Ihrem Fall'], dict:'Fall'},
+ {lesson:'Redemittel 1', en:'Damit möchten wir erreichen, dass ...', uk:'Цим ми хочемо досягти того, щоб …',
+  ex:'Damit möchten wir ___, dass der Zahn erhalten bleibt.', ans:'erreichen',
+  col:['ein Ziel erreichen','eine Besserung erreichen'], dict:'erreichen'},
+ {lesson:'Redemittel 1', en:'Einfach gesagt, ...', uk:'Простіше кажучи, …',
+  ex:'___ gesagt: Die Füllung schützt den Zahn vor weiterem Zerfall.', ans:'Einfach',
+  col:['einfach gesagt','einfach erklärt'], dict:'einfach'},
+ {lesson:'Redemittel 1', en:'Das liegt daran, dass ...', uk:'Це через те, що …',
+  ex:'Das ___ daran, dass Ihr Zahnschmelz sehr dünn ist.', ans:'liegt',
+  col:['das liegt an','es liegt daran'], dict:'liegen'},
+ {lesson:'Redemittel 1', en:'Wenn das nicht behandelt wird, ...', uk:'Якщо це не лікувати, …',
+  ex:'Wenn das nicht ___ wird, kann sich die Entzündung ausbreiten.', ans:'behandelt',
+  col:['eine Entzündung behandeln','unbehandelt bleiben'], dict:'behandeln'},
+ {lesson:'Redemittel 1', en:'Man kann sich das ungefähr so vorstellen, dass ...', uk:'Це можна уявити приблизно так, що …',
+  ex:'Man kann sich das ungefähr so ___, dass der Zahn wie ein Haus auf einem Fundament steht.', ans:'vorstellen',
+  col:['sich etwas vorstellen','sich das so vorstellen'], dict:'vorstellen'},
+ {lesson:'Redemittel 1', en:'Damit wollen wir vermeiden, dass ...', uk:'Цим ми хочемо уникнути того, щоб …',
+  ex:'Damit wollen wir ___, dass sich die Karies weiter ausbreitet.', ans:'vermeiden',
+  col:['Schmerzen vermeiden','Komplikationen vermeiden'], dict:'vermeiden'},
+ {lesson:'Redemittel 1', en:'Das kommt daher, dass ...', uk:'Це тому, що …',
+  ex:'Das kommt ___, dass Sie nachts mit den Zähnen knirschen.', ans:'daher',
+  col:['das kommt daher','daher kommen'], dict:'daher'},
+ {lesson:'Redemittel 1', en:'Wenn man nichts dagegen unternimmt, kann ...', uk:'Якщо нічого з цим не робити, може …',
+  ex:'Wenn man nichts dagegen ___, kann der Zahn verloren gehen.', ans:'unternimmt',
+  col:['etwas dagegen unternehmen','Schritte unternehmen'], dict:'unternehmen'},
+ {lesson:'Redemittel 1', en:'Das bedeutet für Sie, dass ...', uk:'Для вас це означає, що …',
+  ex:'Das ___ für Sie, dass Sie nach der Betäubung zwei Stunden nichts essen sollten.', ans:'bedeutet',
+  col:['das bedeutet','das hat zur Folge'], dict:'bedeuten'},
+ {lesson:'Redemittel 1', en:'Das ist wichtig, damit ...', uk:'Це важливо для того, щоб …',
+  ex:'Das ist wichtig, ___ die Wunde gut heilt.', ans:'damit',
+  col:['wichtig sein','damit etwas heilt'], dict:'damit'},
+ {lesson:'Redemittel 1', en:'Der Grund dafür ist, dass ...', uk:'Причина цього в тому, що …',
+  ex:'Der ___ dafür ist, dass die Wurzel stark entzündet ist.', ans:'Grund',
+  col:['der Grund dafür','aus diesem Grund'], dict:'Grund'},
+ {lesson:'Redemittel 1', en:'Das heißt konkret, dass ...', uk:'Конкретно це означає, що …',
+  ex:'Das heißt ___, dass Sie täglich Zahnseide benutzen sollten.', ans:'konkret',
+  col:['konkret werden','ganz konkret'], dict:'konkret'},
+ {lesson:'Redemittel 1', en:'In der Folge kann ...', uk:'Як наслідок, може …',
+  ex:'In der ___ kann sich ein Abszess bilden.', ans:'Folge',
+  col:['die Folge von','Folgen haben'], dict:'Folge'},
+ {lesson:'Redemittel 1', en:'Dadurch können wir verhindern, dass ...', uk:'Завдяки цьому ми можемо запобігти тому, щоб …',
+  ex:'Dadurch können wir ___, dass sich Bakterien unter der Füllung vermehren.', ans:'verhindern',
+  col:['Karies verhindern','eine Infektion verhindern'], dict:'verhindern'},
+ {lesson:'Redemittel 1', en:'Vereinfacht gesagt, ...', uk:'Спрощено кажучи, …',
+  ex:'___ gesagt: Zahnstein ist verhärteter Belag auf den Zähnen.', ans:'Vereinfacht',
+  col:['vereinfacht gesagt','vereinfacht dargestellt'], dict:'vereinfachen'},
+ {lesson:'Redemittel 1', en:'Das hängt damit zusammen, dass ...', uk:'Це пов’язано з тим, що …',
+  ex:'Das hängt damit ___, dass Sie lange keine Prophylaxe hatten.', ans:'zusammen',
+  col:['mit etwas zusammenhängen','eng zusammenhängen'], dict:'zusammenhängen'},
+ {lesson:'Redemittel 1', en:'Langfristig kann das dazu führen, dass ...', uk:'У довгостроковій перспективі це може призвести до того, що …',
+  ex:'___ kann das dazu führen, dass Zähne locker werden.', ans:'Langfristig',
+  col:['langfristig planen','langfristige Folgen'], dict:'langfristig'},
+ {lesson:'Redemittel 1', en:'Anders ausgedrückt, ...', uk:'Інакше кажучи, …',
+  ex:'Anders ___: Die Krone ersetzt den fehlenden Teil des Zahns.', ans:'ausgedrückt',
+  col:['anders ausgedrückt','sich klar ausdrücken'], dict:'ausdrücken'},
+ {lesson:'Redemittel 1', en:'Das machen wir, um ... zu ...', uk:'Ми робимо це, щоб … (um … zu + інфінітив)',
+  ex:'Das machen wir, ___ den Nerv zu schützen.', ans:'um',
+  col:['um ... zu + Infinitiv','das machen wir, um'], dict:'um'},
+ {lesson:'Redemittel 1', en:'Im Grunde geht es darum, dass ...', uk:'По суті, йдеться про те, що …',
+  ex:'Im Grunde geht es ___, dass keine Bakterien in den Zahn gelangen.', ans:'darum',
+  col:['es geht darum','im Grunde'], dict:'darum'},
+ {lesson:'Redemittel 1', en:'Das ist darauf zurückzuführen, dass ...', uk:'Це пояснюється тим, що …',
+  ex:'Das ist darauf ___, dass Sie viel Zucker essen.', ans:'zurückzuführen',
+  col:['auf etwas zurückführen','darauf zurückzuführen sein'], dict:'zurückführen'},
+ {lesson:'Redemittel 1', en:'Das kann dazu führen, dass ...', uk:'Це може призвести до того, що …',
+  ex:'Das kann dazu ___, dass der Zahn empfindlich auf Kälte reagiert.', ans:'führen',
+  col:['zu etwas führen','dazu führen'], dict:'führen'},
+ {lesson:'Redemittel 1', en:'Das können Sie sich so vorstellen: ...', uk:'Це можна уявити так: …',
+  ex:'Das können Sie ___ so vorstellen: Der Zahn ist wie ein Haus mit einer bröckelnden Wand.', ans:'sich',
+  col:['sich etwas vorstellen','sich so vorstellen'], dict:'vorstellen'},
+ /* ---- Werkzeuge 2: Instrumente in der Zahnarztpraxis ---- */
+ {lesson:'Werkzeuge 2', en:'die Gracey-Kürette', uk:'кюрета Gracey (для однієї поверхні кореня)',
+  ex:'Mit der ___ reinigt die Zahnärztin gezielt eine einzelne Wurzelfläche.', ans:'Gracey-Kürette',
+  col:['subgingival mit der Gracey-Kürette arbeiten','die Wurzeloberfläche glätten'], dict:'Kürette'},
+ {lesson:'Werkzeuge 2', en:'die Universalkürette', uk:'універсальна кюрета',
+  ex:'Die ___ hat zwei Schneidekanten und passt an viele Zähne.', ans:'Universalkürette',
+  col:['die Universalkürette ansetzen','mit beiden Schneidekanten arbeiten'], dict:'Kürette'},
+ {lesson:'Werkzeuge 2', en:'der Sichel-Scaler', uk:'серпоподібний скейлер',
+  ex:'Mit dem ___ entfernt man Zahnstein oberhalb des Zahnfleischrandes.', ans:'Sichel-Scaler',
+  col:['Zahnstein oberhalb des Zahnfleischs entfernen','den Sichel-Scaler anlegen'], dict:'Scaler'},
+ {lesson:'Werkzeuge 2', en:'die Parodontalsonde', uk:'пародонтальний зонд (зі шкалою в мм)',
+  ex:'Mit der ___ misst die Hygienikerin die Taschentiefe in Millimetern.', ans:'Parodontalsonde',
+  col:['die Taschentiefe messen','mit der Parodontalsonde sondieren'], dict:'Parodontalsonde'},
+ {lesson:'Werkzeuge 2', en:'die Furkationssonde', uk:'зонд для фуркацій (простір між коренями)',
+  ex:'Die gebogene ___ prüft den Bereich zwischen den Wurzeln.', ans:'Furkationssonde',
+  col:['die Furkation sondieren','mit der Furkationssonde prüfen'], dict:'Furkation'},
+ {lesson:'Werkzeuge 2', en:'der Ultraschall-Scaler', uk:'ультразвуковий скейлер',
+  ex:'Der ___ vibriert und kühlt die Spitze mit Wasser.', ans:'Ultraschall-Scaler',
+  col:['mit dem Ultraschall-Scaler arbeiten','Zahnstein abtragen'], dict:'Scaler'},
+ {lesson:'Werkzeuge 2', en:'das Ultraschallhandstück', uk:'ультразвуковий наконечник',
+  ex:'Die Assistentin steckt die Spitze auf das ___.', ans:'Ultraschallhandstück',
+  col:['das Handstück wechseln','die Spitze aufstecken'], dict:'Handstück'},
+ {lesson:'Werkzeuge 2', en:'die Pulverstrahldüse', uk:'насадка для порошкового струменя',
+  ex:'Mit der ___ entfernt man Verfärbungen von den Zähnen.', ans:'Pulverstrahldüse',
+  col:['die Düse aufsetzen','Verfärbungen mit Pulverstrahl entfernen'], dict:'Düse'},
+ {lesson:'Werkzeuge 2', en:'das Polierhandstück', uk:'полірувальний наконечник',
+  ex:'Für die Politur setzt die Assistentin den Kelch auf das ___.', ans:'Polierhandstück',
+  col:['das Handstück aufsetzen','mit dem Handstück polieren'], dict:'Handstück'},
+ {lesson:'Werkzeuge 2', en:'der Polierkelch', uk:'полірувальна чашечка',
+  ex:'Mit dem ___ verteilt die Assistentin die Paste auf dem Zahn.', ans:'Polierkelch',
+  col:['den Polierkelch aufsetzen','mit dem Polierkelch polieren'], dict:'Polierkelch'},
+ {lesson:'Werkzeuge 2', en:'die Prophylaxepaste', uk:'профілактична паста',
+  ex:'Vor der Politur trägt die Assistentin die ___ auf.', ans:'Prophylaxepaste',
+  col:['die Paste auftragen','die Zähne mit Paste polieren'], dict:'Prophylaxe'},
+ {lesson:'Werkzeuge 2', en:'das Prophylaxepulver', uk:'профілактичний порошок',
+  ex:'Das ___ wird mit Luft und Wasser auf den Zahn gestrahlt.', ans:'Prophylaxepulver',
+  col:['Beläge mit Pulver entfernen','das Pulver nachfüllen'], dict:'Prophylaxe'},
+ {lesson:'Werkzeuge 2', en:'der Rundbohrer', uk:'круглий бор',
+  ex:'Der ___ öffnet den Zahn und erreicht auch tiefe Karies.', ans:'Rundbohrer',
+  col:['mit dem Rundbohrer bohren','Karies entfernen'], dict:'Bohrer'},
+ {lesson:'Werkzeuge 2', en:'der Diamantbohrer', uk:'алмазний бор',
+  ex:'Der ___ schleift den Zahn für eine Krone zurecht.', ans:'Diamantbohrer',
+  col:['den Zahn präparieren','den Bohrer wechseln'], dict:'Bohrer'},
+ {lesson:'Werkzeuge 2', en:'der Hartmetallbohrer', uk:'твердосплавний бор',
+  ex:'Der ___ trägt Zahnsubstanz sehr schnell ab.', ans:'Hartmetallbohrer',
+  col:['mit dem Hartmetallbohrer arbeiten','eine alte Füllung entfernen'], dict:'Bohrer'},
+ {lesson:'Werkzeuge 2', en:'der Finierbohrer', uk:'фінірувальний бор (для остаточної обробки)',
+  ex:'Zum Schluss glättet der Zahnarzt den Rand mit dem ___.', ans:'Finierbohrer',
+  col:['den Rand finieren','die Füllung finieren'], dict:'finieren'},
+ {lesson:'Werkzeuge 2', en:'der Keil', uk:'клин (міжзубний)',
+  ex:'Der ___ drückt die Matrize an den Zahn und schützt das Zahnfleisch.', ans:'Keil',
+  col:['einen Keil setzen','den Keil entfernen'], dict:'Keil'},
+ {lesson:'Werkzeuge 2', en:'der Stopfer', uk:'штопфер (ущільнювач матеріалу)',
+  ex:'Mit dem ___ drückt der Zahnarzt das Füllungsmaterial in die Kavität.', ans:'Stopfer',
+  col:['das Material stopfen','das Material mit dem Stopfer verdichten'], dict:'Stopfer'},
+ {lesson:'Werkzeuge 2', en:'der Heidemann-Spatel', uk:'шпатель Гайдемана (для моделювання пломби)',
+  ex:'Mit dem ___ modelliert die Zahnärztin das Füllungsmaterial.', ans:'Heidemann-Spatel',
+  col:['das Material modellieren','den Spatel reinigen'], dict:'Spatel'},
+ {lesson:'Werkzeuge 2', en:'der Kugelstopfer', uk:'кульковий штопфер',
+  ex:'Mit dem ___ glättet der Zahnarzt die Oberfläche der Füllung.', ans:'Kugelstopfer',
+  col:['die Oberfläche glätten','mit dem Kugelstopfer arbeiten'], dict:'Stopfer'},
+ {lesson:'Werkzeuge 2', en:'der Exkavator', uk:'екскаватор (для видалення розм’якшеного дентину)',
+  ex:'Mit dem ___ schabt der Zahnarzt erweichte Zahnsubstanz heraus.', ans:'Exkavator',
+  col:['Karies auskratzen','mit dem Exkavator arbeiten'], dict:'Exkavator'},
+ {lesson:'Werkzeuge 2', en:'der Löffelexkavator', uk:'ложкоподібний екскаватор',
+  ex:'Der ___ hat eine runde Spitze und entfernt Karies schonend.', ans:'Löffelexkavator',
+  col:['Karies schonend entfernen','den Löffelexkavator verwenden'], dict:'Exkavator'},
+ {lesson:'Werkzeuge 2', en:'die endodontische Kanüle', uk:'ендодонтична голка (для промивання каналу)',
+  ex:'Mit der endodontischen ___ spült der Zahnarzt den Wurzelkanal.', ans:'Kanüle',
+  col:['den Kanal spülen','die Kanüle aufstecken'], dict:'Kanüle'},
+ {lesson:'Werkzeuge 2', en:'die Wurzelkanalfeile', uk:'файл кореневого каналу',
+  ex:'Mit der ___ erweitert der Zahnarzt den Kanal.', ans:'Wurzelkanalfeile',
+  col:['den Kanal aufbereiten','die Feile wechseln'], dict:'Feile'},
+ {lesson:'Werkzeuge 2', en:'die Hedström-Feile', uk:'Hedström-файл (працює при витягуванні)',
+  ex:'Die ___ trägt Material beim Herausziehen ab.', ans:'Hedström-Feile',
+  col:['die Feile herausziehen','mit der Hedström-Feile arbeiten'], dict:'Feile', say:'die Hedström Feile'},
+ {lesson:'Werkzeuge 2', en:'der Lentulo', uk:'лентуло (спіраль для внесення пасти в канал)',
+  ex:'Mit dem ___ bringt der Zahnarzt die Füllpaste in den Kanal.', ans:'Lentulo',
+  col:['die Paste einbringen','den Lentulo rotieren lassen'], dict:'Lentulo'},
+ {lesson:'Werkzeuge 2', en:'der Spreader', uk:'спредер (бічне ущільнення гутаперчі)',
+  ex:'Der ___ drückt die Guttapercha im Kanal zur Seite.', ans:'Spreader',
+  col:['den Spreader einführen','Guttapercha seitlich verdichten'], dict:'Spreader'},
+ {lesson:'Werkzeuge 2', en:'der Plugger', uk:'плагер (вертикальне ущільнення)',
+  ex:'Mit dem ___ verdichtet man die Wurzelfüllung von oben.', ans:'Plugger',
+  col:['die Füllung verdichten','den Plugger erwärmen'], dict:'Plugger'},
+ {lesson:'Werkzeuge 2', en:'der Guttaperchastift', uk:'гутаперчевий штифт',
+  ex:'Zum Schluss füllt der Zahnarzt den Kanal mit einem ___.', ans:'Guttaperchastift',
+  col:['den Stift einpassen','den Kanal füllen'], dict:'Guttapercha'},
+ {lesson:'Werkzeuge 2', en:'der Apex-Lokator', uk:'апекслокатор (також: das Apex-Lokalisationsgerät)',
+  ex:'Der ___ zeigt an, wo das Ende des Wurzelkanals liegt.', ans:'Apex-Lokator',
+  col:['die Arbeitslänge messen','den Apex-Lokator anschließen'], dict:'Apex', say:'der Apex Lokator'},
+ {lesson:'Werkzeuge 2', en:'die Extraktionszange', uk:'щипці для видалення зуба',
+  ex:'Mit der ___ entfernt der Zahnarzt den gelockerten Zahn.', ans:'Extraktionszange',
+  col:['einen Zahn extrahieren','die Extraktionszange ansetzen'], dict:'Extraktion'},
+ {lesson:'Werkzeuge 2', en:'der Elevator', uk:'елеватор (важіль для розхитування зуба; також der Hebel)',
+  ex:'Mit dem ___ lockert der Zahnarzt den Zahn im Knochen.', ans:'Elevator',
+  col:['den Zahn lockern','den Elevator ansetzen'], dict:'Elevator'},
+ {lesson:'Werkzeuge 2', en:'der Wurzelelevator', uk:'кореневий елеватор',
+  ex:'Der ___ hilft, eine abgebrochene Wurzel zu entfernen.', ans:'Wurzelelevator',
+  col:['eine Wurzel lösen','den Wurzelelevator ansetzen'], dict:'Elevator'},
+ {lesson:'Werkzeuge 2', en:'die chirurgische Pinzette', uk:'хірургічний пінцет',
+  ex:'Die chirurgische ___ hält das Gewebe beim Nähen fest.', ans:'Pinzette',
+  col:['Gewebe mit der Pinzette halten','die Pinzette reichen'], dict:'Pinzette'},
+ {lesson:'Werkzeuge 2', en:'die chirurgische Schere', uk:'хірургічні ножиці',
+  ex:'Mit der chirurgischen ___ schneidet der Arzt den Faden ab.', ans:'Schere',
+  col:['den Faden abschneiden','Gewebe durchtrennen'], dict:'Schere'},
+ {lesson:'Werkzeuge 2', en:'der Nadelhalter', uk:'голкотримач',
+  ex:'Mit dem ___ führt der Chirurg die Nadel durch das Zahnfleisch.', ans:'Nadelhalter',
+  col:['die Nadel einspannen','die Wunde nähen'], dict:'Nadelhalter'},
+ {lesson:'Werkzeuge 2', en:'das Skalpell', uk:'скальпель',
+  ex:'Mit dem ___ macht der Chirurg einen Schnitt im Zahnfleisch.', ans:'Skalpell',
+  col:['einen Schnitt setzen','die Klinge wechseln'], dict:'Skalpell'},
+ {lesson:'Werkzeuge 2', en:'die Lucas-Kürette', uk:'кюрета Lucas (хірургічна)',
+  ex:'Mit der ___ kratzt der Chirurg entzündetes Gewebe aus der Alveole.', ans:'Lucas-Kürette',
+  col:['entzündetes Gewebe auskratzen','die Alveole säubern'], dict:'Kürette'},
+ {lesson:'Werkzeuge 2', en:'das Raspatorium', uk:'распатор (для відшарування слизової)',
+  ex:'Mit dem ___ löst der Chirurg das Zahnfleisch vom Knochen.', ans:'Raspatorium',
+  col:['die Schleimhaut ablösen','das Zahnfleisch zurückschieben'], dict:'Raspatorium'},
+ {lesson:'Werkzeuge 2', en:'der Abformlöffel', uk:'відбиткова ложка',
+  ex:'Der Zahnarzt füllt den ___ mit Abformmasse.', ans:'Abformlöffel',
+  col:['einen Abdruck nehmen','den Löffel einsetzen'], dict:'Abformlöffel'},
+ {lesson:'Werkzeuge 2', en:'der individuelle Abformlöffel', uk:'індивідуальна відбиткова ложка',
+  ex:'Der individuelle ___ wird im Labor für den Patienten angefertigt.', ans:'Abformlöffel',
+  col:['einen Löffel anfertigen','den Löffel anpassen'], dict:'individuell'},
+ {lesson:'Werkzeuge 2', en:'der Anmischspatel', uk:'шпатель для замішування',
+  ex:'Mit dem ___ mischt die Assistentin die Abformmasse an.', ans:'Anmischspatel',
+  col:['Material anmischen','den Spatel reinigen'], dict:'anmischen'},
+ {lesson:'Werkzeuge 2', en:'das Wachsmesser', uk:'восковий ніж',
+  ex:'Mit dem ___ schneidet der Zahntechniker das Wachs.', ans:'Wachsmesser',
+  col:['Wachs schneiden','das Messer erwärmen'], dict:'Wachsmesser'},
+ {lesson:'Werkzeuge 2', en:'der Artikulator', uk:'артикулятор (імітує рухи щелеп)',
+  ex:'Das Gipsmodell wird im ___ befestigt.', ans:'Artikulator',
+  col:['ein Modell einsetzen','den Biss im Artikulator prüfen'], dict:'Artikulator'},
+ {lesson:'Werkzeuge 2', en:'das Bissregistrat', uk:'реєстрат прикусу (фіксує положення щелеп)',
+  ex:'Mit dem ___ hält man die Stellung der Kiefer fest.', ans:'Bissregistrat',
+  col:['ein Bissregistrat nehmen','den Biss registrieren'], dict:'Bissregistrat'},
+ {lesson:'Werkzeuge 2', en:'der Artikulationspapierhalter', uk:'тримач артикуляційного паперу',
+  ex:'Mit dem ___ prüft der Zahnarzt, wo die Zähne Kontakt haben.', ans:'Artikulationspapierhalter',
+  col:['Artikulationspapier einspannen','Kontaktpunkte markieren'], dict:'Artikulationspapier'}
+];
+
+/* Виделки: ok — що поєднується, bad — зайве */
+const FORKS = [
+ {lesson:'Werkzeuge 1', word:'Zähne untersuchen',
+  ok:['der Mundspiegel','die Sonde','die Messsonde','die Häkchensonden'], bad:['die Zange'],
+  why:'Для огляду беруть дзеркало й зонди. Щипці потрібні, щоб видалити зуб, а не оглянути.'},
+ {lesson:'Werkzeuge 1', word:'Zahnstein entfernen',
+  ok:['der Scaler','die Kürette','der Ultraschall'], bad:['der Poliergummi'],
+  why:'Зубний камінь знімають скейлером, кюретою або ультразвуком. Полірувальна гумка лише згладжує поверхню.'},
+ {lesson:'Werkzeuge 1', word:'eine Füllung legen',
+  ok:['die Turbine','die Matrize','der Matrizenspanner'], bad:['die Zange'],
+  why:'Каріозну тканину прибирають турбіною, а матрицю закріплюють матрицетримачем. Щипці до пломби не стосуються.'},
+ {lesson:'Werkzeuge 1', word:'absaugen',
+  ok:['Speichel','Blut','Spülwasser'], bad:['die Pinzette'],
+  why:'Відсмоктують рідини: слину, кров, воду. Пінцетом беруть предмети, його не «абсаугають».'},
+ {lesson:'Redemittel 1', word:'die Ursache',
+  ok:['die Ursache finden','die Ursache beheben','die Ursache klären'], bad:['die Ursache lösen'],
+  why:'Ursache finden, beheben, klären. «Lösen» вживають із Problem, а не з Ursache.'},
+ {lesson:'Redemittel 1', word:'die Entzündung',
+  ok:['eine Entzündung behandeln','sich eine Entzündung zuziehen','die Entzündung klingt ab'], bad:['eine Entzündung durchführen'],
+  why:'Запалення лікують, підхоплюють, воно вщухає. «Durchführen» — це про лікування чи втручання, а не про запалення.'},
+ {lesson:'Redemittel 1', word:'führen',
+  ok:['zu Schmerzen führen','zu Komplikationen führen','zu Zahnverlust führen'], bad:['an Schmerzen führen'],
+  why:'Після führen йде прийменник zu + Dativ: «zu etwas führen», «dazu führen, dass». Варіант з «an» неправильний.'},
+ {lesson:'Redemittel 1', word:'die Behandlung',
+  ok:['eine Behandlung durchführen','eine Behandlung beginnen','eine Behandlung abschließen'], bad:['eine Behandlung nehmen'],
+  why:'Лікування проводять, починають, завершують. «Nehmen» кажуть про ліки (ein Medikament nehmen).'},
+ {lesson:'Werkzeuge 2', word:'den Wurzelkanal behandeln',
+  ok:['die Wurzelkanalfeile','die Hedström-Feile','die endodontische Kanüle','der Apex-Lokator'], bad:['die Extraktionszange'],
+  why:'Канал розширюють файлами, промивають голкою й вимірюють довжину апекслокатором. Щипці потрібні, щоб видалити зуб.'},
+ {lesson:'Werkzeuge 2', word:'eine Wurzelfüllung legen',
+  ok:['der Spreader','der Plugger','der Guttaperchastift','der Lentulo'], bad:['der Elevator'],
+  why:'Канал пломбують гутаперчею: спредер і плагер ущільнюють її, лентуло вносить пасту. Елеватор лише розхитує зуб.'},
+ {lesson:'Werkzeuge 2', word:'einen Zahn ziehen',
+  ok:['die Extraktionszange','der Elevator','der Wurzelelevator'], bad:['die Prophylaxepaste'],
+  why:'Зуб розхитують елеватором і виймають щипцями. Профілактична паста потрібна лише для полірування.'},
+ {lesson:'Werkzeuge 2', word:'Zähne polieren',
+  ok:['der Polierkelch','die Prophylaxepaste','das Polierhandstück'], bad:['der Hartmetallbohrer'],
+  why:'Для полірування потрібні наконечник, чашечка й паста. Твердосплавний бор знімає тканину, а не полірує.'}
+];
+
+/* Категорії: кожна фраза (поле en) — лише в одній групі */
+const SORTS = [
+ {lesson:'Werkzeuge 1', title:'Wofür braucht man das Instrument?', cats:{
+   'Untersuchen':['der Mundspiegel','die Sonde','die Häkchensonden','die Messsonde','die biegbare Sonde'],
+   'Reinigen und Polieren':['der Scaler','die Kürette','der Ultraschall','die Polierbürste','der Poliergummi'],
+   'Absaugen und Greifen':['der große Absauger','der Speichelzieher','die Pinzette','die Zange'],
+   'Füllung legen':['die Turbine','die Matrize','der Matrizenspanner']
+ }},
+ {lesson:'Redemittel 1', title:'Wozu dient die Formulierung im Patientengespräch?', cats:{
+   'Erklären und umformulieren':['Mit anderen Worten, ...','Einfach gesagt, ...','Vereinfacht gesagt, ...','Anders ausgedrückt, ...','Man kann sich das ungefähr so vorstellen, dass ...','Das können Sie sich so vorstellen: ...','Das heißt konkret, dass ...','Im Grunde geht es darum, dass ...'],
+   'Ursachen nennen':['Die Ursache dafür ist ...','Das liegt daran, dass ...','Das kommt daher, dass ...','Der Grund dafür ist, dass ...','Das hängt damit zusammen, dass ...','Das ist darauf zurückzuführen, dass ...'],
+   'Folgen und Risiken':['Dadurch kann es zu ... kommen.','Wenn das nicht behandelt wird, ...','Wenn man nichts dagegen unternimmt, kann ...','In der Folge kann ...','Langfristig kann das dazu führen, dass ...','Das kann dazu führen, dass ...'],
+   'Ziel und Bedeutung für Patienten':['In Ihrem Fall bedeutet das, dass ...','Damit möchten wir erreichen, dass ...','Damit wollen wir vermeiden, dass ...','Das bedeutet für Sie, dass ...','Das ist wichtig, damit ...','Dadurch können wir verhindern, dass ...','Das machen wir, um ... zu ...']
+ }},
+ {lesson:'Werkzeuge 2', title:'Wofür braucht man das Instrument?', cats:{
+   'Sondieren und Zahnstein':['die Parodontalsonde','die Furkationssonde','die Gracey-Kürette','die Universalkürette','der Sichel-Scaler','der Ultraschall-Scaler','das Ultraschallhandstück'],
+   'Polieren und Prophylaxe':['die Pulverstrahldüse','das Polierhandstück','der Polierkelch','die Prophylaxepaste','das Prophylaxepulver'],
+   'Präparieren und Füllung':['der Rundbohrer','der Diamantbohrer','der Hartmetallbohrer','der Finierbohrer','der Exkavator','der Löffelexkavator','der Keil','der Stopfer','der Heidemann-Spatel','der Kugelstopfer'],
+   'Wurzelbehandlung':['die endodontische Kanüle','die Wurzelkanalfeile','die Hedström-Feile','der Lentulo','der Spreader','der Plugger','der Guttaperchastift','der Apex-Lokator'],
+   'Chirurgie':['die Extraktionszange','der Elevator','der Wurzelelevator','die chirurgische Pinzette','die chirurgische Schere','der Nadelhalter','das Skalpell','die Lucas-Kürette','das Raspatorium'],
+   'Prothetik und Labor':['der Abformlöffel','der individuelle Abformlöffel','der Anmischspatel','das Wachsmesser','der Artikulator','das Bissregistrat','der Artikulationspapierhalter']
+ }}
+];
+
+/* ================= HELPERS ================= */
+const INTERVALS=[1,3,7,14,30,60];
+const BATCH=20;
+const MAP={}; CARDS.forEach(c=>{MAP[c.en]=c;});
+const LESSONS=[...new Set(CARDS.map(c=>c.lesson))].sort((a,b)=>a.localeCompare(b,'de',{numeric:true}));
+const $=(s,r)=>(r||document).querySelector(s);
+const esc=s=>String(s).replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
+const today=()=>{const d=new Date();return Math.floor((d.getTime()-d.getTimezoneOffset()*60000)/864e5);};
+const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));const t=a[i];a[i]=a[j];a[j]=t;}return a;};
+const norm=s=>String(s).toLowerCase().replace(/ä/g,'ae').replace(/ö/g,'oe').replace(/ü/g,'ue').replace(/ß/g,'ss').replace(/[^a-z0-9 ]+/g,' ').replace(/\s+/g,' ').trim();
+
+/* ================= STORAGE ================= */
+const mem={};
+function lsGet(k){try{return localStorage.getItem(k);}catch(e){return (k in mem)?mem[k]:null;}}
+function lsSet(k,v){try{localStorage.setItem(k,v);}catch(e){mem[k]=v;}}
+function load(k,def){try{const s=lsGet(k);return s?JSON.parse(s):def;}catch(e){return def;}}
+function save(k,v){try{lsSet(k,JSON.stringify(v));}catch(e){}}
+const K={prog:'olga.cards.prog.v1',sess:'olga.cards.sess.v1',set:'olga.cards.set.v1',theme:'olga.cards.theme'};
+let prog=load(K.prog,{}); if(!prog||typeof prog!=='object')prog={};
+let S=Object.assign({mode:'today',random:false,rev:false,lessons:null,voice:''},load(K.set,{}));
+let sess=load(K.sess,null);
+const sel=()=>{const l=Array.isArray(S.lessons)?S.lessons.filter(x=>LESSONS.includes(x)):[];return l.length?l:LESSONS.slice();};
+const selectedCards=()=>{const s=sel();return CARDS.filter(c=>s.includes(c.lesson));};
+const saveS=()=>save(K.set,S);
+const getP=en=>prog[en]||{lvl:0,due:0,again:false,seen:false};
+function mark(en,kind){
+  const p=Object.assign({},getP(en));p.seen=true;
+  if(kind==='know'){p.lvl=(p.lvl||0)+1;p.due=today()+INTERVALS[Math.min(p.lvl-1,INTERVALS.length-1)];p.again=false;}
+  else{p.lvl=0;p.due=today();p.again=true;}
+  prog[en]=p;save(K.prog,prog);
+}
+
+/* ================= STATE ================= */
+const ui={tab:'cards',flipped:false,revealed:false,exSrc:'all',resetArm:false,codeMsg:'',codeOut:''};
+let ex=null;
+
+/* ================= VOICE ================= */
+const JOKE=/^(Albert|Bad News|Bahh|Bells|Boing|Bubbles|Cellos|Deranged|Good News|Hysterical|Jester|Organ|Superstar|Trinoids|Whisper|Wobble|Zarvox|Fred|Junior|Ralph|Kathy)\b/i;
+const GOOD=/natural|neural|premium|enhanced|siri|google/i;
+function voices(){try{return window.speechSynthesis.getVoices().filter(v=>/^de/i.test(v.lang)&&!JOKE.test(v.name));}catch(e){return [];}}
+function scoreV(v){let s=0;if(GOOD.test(v.name))s+=10;if(/premium|neural|natural/i.test(v.name))s+=4;if(/enhanced|siri/i.test(v.name))s+=2;if(/^de[-_]DE/i.test(v.lang))s+=2;return s;}
+function bestVoice(){
+  const vs=voices().sort((a,b)=>scoreV(b)-scoreV(a));
+  if(S.voice){const f=vs.find(v=>v.voiceURI===S.voice||v.name===S.voice);if(f)return f;}
+  return vs[0]||null;
+}
+function speak(text,rate){
+  try{
+    const u=new SpeechSynthesisUtterance(text);u.lang='de-DE';
+    const v=bestVoice();if(v){u.voice=v;u.lang=v.lang;}
+    u.rate=rate||0.95;
+    window.speechSynthesis.cancel();window.speechSynthesis.speak(u);
+  }catch(e){}
+}
+const sayText=c=>(c.say||c.en).replace(/\.{2,}|…/g,' ').replace(/\s+/g,' ').trim();
+try{window.speechSynthesis.addEventListener('voiceschanged',()=>{if(ui.tab==='set')render();});}catch(e){}
+
+/* ================= SESSION ================= */
+function buildIds(mode){
+  const cs=selectedCards(),t=today();
+  const A=cs.filter(c=>getP(c.en).again);
+  const B=cs.filter(c=>{const p=getP(c.en);return p.seen&&!p.again&&p.due<=t;});
+  const C=cs.filter(c=>!getP(c.en).seen);
+  const mix=a=>S.random?shuffle(a):a;
+  let list;
+  if(mode==='today')list=mix(A).concat(mix(B),mix(C)).slice(0,BATCH);
+  else if(mode==='all')list=mix(cs);
+  else if(mode==='again')list=mix(A);
+  else list=mix(C);
+  return list.map(c=>c.en);
+}
+function newSession(mode,ids,custom){
+  sess={mode:mode,lessons:sel().join('|'),ids:ids||buildIds(mode),idx:0,res:{},custom:!!custom};
+  save(K.sess,sess);ui.flipped=false;ui.revealed=false;
+}
+function ensureSession(){
+  if(!sess||!Array.isArray(sess.ids)||sess.mode!==S.mode||sess.lessons!==sel().join('|')||!sess.ids.every(id=>MAP[id]))newSession(S.mode);
+}
+function answer(kind){
+  ensureSession();
+  const id=sess.ids[sess.idx];if(!id)return;
+  mark(id,kind);sess.res[id]=kind;sess.idx++;
+  ui.flipped=false;ui.revealed=false;save(K.sess,sess);render();
+}
+
+/* ================= RENDER: CHROME ================= */
+function renderLessons(){
+  const s=sel(),all=s.length===LESSONS.length;
+  $('#lessons').innerHTML=
+    '<button class="chip '+(all?'on':'')+'" aria-pressed="'+all+'" data-act="lessonAll" type="button">Усі уроки · мікс</button>'+
+    LESSONS.map(l=>{const n=CARDS.filter(c=>c.lesson===l).length;const on=s.includes(l)&&!(all&&LESSONS.length>1);
+      return '<button class="chip '+(on?'on':'')+'" aria-pressed="'+on+'" data-act="lesson" data-v="'+esc(l)+'" type="button">'+esc(l)+'<small>'+n+'</small></button>';}).join('');
+}
+function renderTabs(){
+  const tabs=[['cards','Картки'],['ex','Вправи'],['set','Налаштування й прогрес']];
+  $('#tabs').innerHTML=tabs.map(t=>'<button class="'+(ui.tab===t[0]?'on':'')+'" data-act="tab" data-v="'+t[0]+'" type="button">'+t[1]+'</button>').join('');
+}
+function themeLabel(){const t=lsGet(K.theme)||'auto';return 'Тема: '+({auto:'авто',light:'світла',dark:'темна'}[t]||'авто');}
+function applyTheme(){
+  const t=lsGet(K.theme)||'auto',r=document.documentElement;
+  if(t==='light'||t==='dark')r.setAttribute('data-theme',t);else r.removeAttribute('data-theme');
+  $('#themeBtn').textContent=themeLabel();
+}
+function toast(m){const t=$('#toast');t.textContent=m;t.classList.add('on');clearTimeout(toast.t);toast.t=setTimeout(()=>t.classList.remove('on'),2200);}
+
+const ICON='<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z" fill="currentColor"/><path d="M16 8.5a5 5 0 0 1 0 7M18.5 6a8.5 8.5 0 0 1 0 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>';
+const spk=(c,label)=>'<button class="'+(label?'sbtn':'icon')+'" data-act="speak" data-k="'+CARDS.indexOf(c)+'" type="button" aria-label="Прослухати">'+ICON+(label?'<span>Вимова</span>':'')+'</button>';
+
+/* ================= RENDER: CARDS ================= */
+function sentenceHtml(c){
+  const p=c.ex.split('___');
+  return esc(p[0])+'<button class="blank" data-act="reveal" type="button" aria-label="Показати пропущене слово">'+(ui.revealed?esc(c.ans):'&nbsp;')+'</button>'+esc(p[1]||'');
+}
+function frontHtml(c){
+  return '<div class="face front"><div class="head"><span class="tag">'+esc(c.lesson)+'</span>'+(S.rev?'':spk(c))+'</div>'+
+    '<div class="mid">'+(S.rev?'<p class="phrase uk">'+esc(c.uk)+'</p><p class="hintline">Як це німецькою?</p>':'<p class="phrase">'+esc(c.en)+'</p>')+'</div>'+
+    '<p class="flipnote">Торкніться, щоб перевернути</p></div>';
+}
+function backHtml(c){
+  const main=S.rev?'<p class="phrase sm">'+esc(c.en)+'</p><p class="trans sm">'+esc(c.uk)+'</p>'
+                   :'<p class="small">'+esc(c.en)+'</p><p class="trans">'+esc(c.uk)+'</p>';
+  return '<div class="face back"><div class="head"><span class="tag">'+esc(c.lesson)+'</span></div>'+
+    '<div class="mid left">'+main+'<p class="ex">'+sentenceHtml(c)+'</p></div>'+
+    '<div class="btnrow">'+spk(c,true)+'<a class="sbtn" href="https://www.duden.de/suchen/dudenonline/'+encodeURIComponent(c.dict||c.en)+'" target="_blank" rel="noopener">Duden</a></div></div>';
+}
+function cardsHtml(){
+  ensureSession();
+  const modes=[['today','На сьогодні'],['all','Усі картки'],['again','Тільки повторити'],['new','Тільки нові']];
+  let h='<div class="seg" role="group" aria-label="Режим">'+modes.map(m=>'<button class="chip '+(S.mode===m[0]?'on':'')+'" aria-pressed="'+(S.mode===m[0])+'" data-act="mode" data-v="'+m[0]+'" type="button">'+m[1]+'</button>').join('')+'</div>'+
+    '<div class="seg"><button class="chip '+(S.random?'on':'')+'" aria-pressed="'+S.random+'" data-act="random" type="button">Випадково</button>'+
+    '<button class="chip '+(S.rev?'on':'')+'" aria-pressed="'+S.rev+'" data-act="rev" type="button">UA → DE</button>'+
+    '<button class="chip" data-act="restart" type="button">Почати заново</button></div>';
+  const total=sess.ids.length;
+  if(!total){
+    const msgs={today:['На сьогодні все','Прострочених і нових карток немає. Наступні повернуться за розкладом.'],
+      all:['Немає карток','У вибраних уроках немає фраз.'],again:['Немає слів для повторення','Позначайте картки «Повторити», і вони зберуться тут.'],new:['Нових карток немає','Усі фрази вже бачені.']};
+    const m=msgs[S.mode];
+    return h+'<div class="panel"><p class="bigtxt">'+m[0]+'</p><p class="muted">'+m[1]+'</p><div class="actcol">'+
+      (S.mode==='today'?'<button class="btn primary" data-act="mode" data-v="all" type="button">Усі картки</button>':'')+
+      '<button class="btn line" data-act="toex" type="button">До вправ</button></div></div>';
+  }
+  const kn=sess.ids.filter(i=>sess.res[i]==='know').length,ag=sess.ids.filter(i=>sess.res[i]==='again').length;
+  if(sess.idx>=total){
+    const againIds=sess.ids.filter(i=>sess.res[i]==='again');
+    return h+'<div class="panel"><p class="bigtxt">'+(sess.custom?'Повторення завершено':'Порцію завершено')+'</p>'+
+      '<p class="muted">Знаю: <b>'+kn+'</b> · Повторити: <b>'+ag+'</b> · Усього: '+total+'</p>'+
+      (againIds.length?'<ul class="list">'+againIds.map(i=>'<li><span>'+esc(i)+'</span><span>'+esc(MAP[i].uk)+'</span></li>').join('')+'</ul>':'<p class="note">Усе знайоме. Чудово!</p>')+
+      '<div class="actcol">'+(againIds.length?'<button class="btn primary" data-act="againWords" type="button">Повторити ці слова</button>':'')+
+      '<button class="btn line" data-act="more" type="button">Ще порція</button>'+
+      '<button class="btn line" data-act="toex" type="button">До вправ</button></div></div>';
+  }
+  const c=MAP[sess.ids[sess.idx]];
+  return h+'<div class="meter"><div class="bar"><i style="width:'+(sess.idx/total*100)+'%"></i></div>'+
+    '<div class="count"><b>'+(sess.idx+1)+'</b> / '+total+' · <span class="k">знаю '+kn+'</span> · <span class="r">повт. '+ag+'</span></div></div>'+
+    '<div class="card3d '+(ui.flipped?'flipped':'')+'" id="card" role="button" tabindex="0" aria-label="Картка. Натисніть, щоб перевернути"><div class="inner">'+frontHtml(c)+backHtml(c)+'</div></div>'+
+    '<div class="acts"><button class="btn again" data-act="again" type="button">← Повторити</button><button class="btn know" data-act="know" type="button">Знаю →</button></div>'+
+    '<p class="kbd">Пробіл — перевернути · ← повторити · → знаю</p>';
+}
+
+/* ================= RENDER: EXERCISES ================= */
+const EXS=[['pairs','Пари','З’єднайте фразу з перекладом'],['gap','Пропуск','Впишіть слово в речення'],['quiz','Тест','Оберіть правильний варіант'],
+ ['dict','Диктант','Прослухайте й напишіть'],['forks','Виделки','Що поєднується зі словом'],['sorts','Категорії','Розкладіть фрази по групах']];
+const exPool=()=>{const cs=selectedCards();return ui.exSrc==='again'?cs.filter(c=>getP(c.en).again):cs;};
+function exMenu(){
+  const n=exPool().length;
+  return '<div class="seg" role="group"><button class="chip '+(ui.exSrc==='all'?'on':'')+'" data-act="src" data-v="all" type="button">Усі фрази</button>'+
+    '<button class="chip '+(ui.exSrc==='again'?'on':'')+'" data-act="src" data-v="again" type="button">Тільки повторити</button></div>'+
+    '<p class="note" style="margin:0 0 12px">Фраз у вправах: <b>'+n+'</b></p>'+
+    '<div class="exgrid">'+EXS.map(e=>'<button class="exbtn" data-act="exstart" data-v="'+e[0]+'" type="button"><b>'+e[1]+'</b><span>'+e[2]+'</span></button>').join('')+'</div>';
+}
+function exHead(cur,n){
+  return '<div class="exhead"><button class="ghost" data-act="exback" type="button">← Вправи</button><span class="count">'+(cur>0?cur+' / '+n:'')+'</span></div>'+
+    '<div class="bar"><i style="width:'+(n?Math.min(100,(cur-1<0?0:cur-1)/n*100):0)+'%"></i></div>';
+}
+function resultHtml(score,total,withAdd){
+  const mist=ex.mist||[];
+  const list=mist.map(en=>'<li><span>'+esc(en)+'</span><span>'+esc(MAP[en]?MAP[en].uk:'')+'</span></li>').join('');
+  return '<div class="panel" style="margin-top:14px"><p class="bigtxt">Результат: '+score+' з '+total+'</p>'+
+    (mist.length?'<p class="muted">Помилки:</p><ul class="list">'+list+'</ul>':'<p class="muted">Без помилок. Чудово!</p>')+
+    '<div class="actcol">'+(withAdd&&mist.length?'<button class="btn primary" data-act="exadd" type="button" '+(ex.added?'disabled':'')+'>'+(ex.added?'Додано в повторення':'Додати ці слова в повторення')+'</button>':'')+
+    '<button class="btn line" data-act="exagain" type="button">Ще раз</button><button class="btn line" data-act="exback" type="button">До вправ</button></div></div>';
+}
+function exHtml(){
+  if(!ex)return exMenu();
+  switch(ex.type){
+    case 'pairs':return pairsHtml();case 'gap':return gapHtml();case 'quiz':return quizHtml();
+    case 'dict':return dictHtml();case 'forks':return forksHtml();case 'sorts':return sortsHtml();
+  }
+  return exMenu();
+}
+function startEx(type){
+  const cs=exPool();
+  const need={pairs:2,gap:1,quiz:1,dict:1}[type];
+  if(need&&cs.length<need){toast(ui.exSrc==='again'?'Немає слів для повторення':'У вибраних уроках немає фраз');return;}
+  if(type==='pairs'){
+    const items=shuffle(cs).slice(0,6);
+    ex={type,items,right:shuffle(items.map(c=>c.en)),matched:[],sel:null,mist:new Set(),flash:null,done:false};
+  }else if(type==='gap'){
+    ex={type,items:shuffle(cs).slice(0,10),i:0,score:0,mist:[],cur:{checked:false,ok:false,hint:false,val:''},done:false};
+  }else if(type==='quiz'){
+    const all=selectedCards();
+    const items=shuffle(cs).slice(0,10).map(c=>{
+      let others=shuffle(all.filter(x=>x.en!==c.en));
+      if(others.length<3)others=others.concat(shuffle(CARDS.filter(x=>x.en!==c.en&&!others.includes(x))));
+      return {c:c,dir:Math.random()<.5?'de':'uk',opts:shuffle([c].concat(others.slice(0,3)))};
+    });
+    ex={type,items,i:0,score:0,mist:[],cur:{pick:null},done:false};
+  }else if(type==='dict'){
+    ex={type,items:shuffle(cs).slice(0,8),i:0,score:0,mist:[],cur:{checked:false,ok:false,val:''},done:false};
+  }else if(type==='forks'){
+    const s=sel(),fk=shuffle(FORKS.filter(f=>s.includes(f.lesson)));
+    if(!fk.length){toast('Для вибраних уроків немає виделок');return;}
+    ex={type,items:fk,i:0,score:0,mist:[],cur:null,done:false};forkCur();
+  }else if(type==='sorts'){
+    const s=sel(),st=SORTS.filter(f=>s.includes(f.lesson));
+    if(!st.length){toast('Для вибраних уроків немає категорій');return;}
+    const set=st[Math.floor(Math.random()*st.length)];
+    const phrases=[];Object.keys(set.cats).forEach(k=>set.cats[k].forEach(p=>phrases.push(p)));
+    ex={type,set,keys:Object.keys(set.cats),pool:shuffle(phrases),placed:{},sel:null,checked:false,mist:[],done:false};
+  }
+  render();
+}
+
+/* --- pairs --- */
+function pairsHtml(){
+  const m=ex.matched,fl=ex.flash||[];
+  const chip=(side,id,txt)=>{
+    const done=m.includes(id),on=ex.sel&&ex.sel.side===side&&ex.sel.id===id;
+    return '<button class="pchip '+(side==='L'?'de':'')+(done?' done':'')+(on?' sel':'')+(fl.includes(side+id)?' wrong':'')+'" data-act="pair" data-side="'+side+'" data-id="'+esc(id)+'" '+(done?'disabled':'')+' type="button">'+esc(txt)+'</button>';
+  };
+  let h=exHead(m.length+1,ex.items.length+1)+'<p class="note" style="margin:12px 0">Торкніться фрази, потім її перекладу.</p>'+
+    '<div class="pairs"><div class="col">'+ex.items.map(c=>chip('L',c.en,c.en)).join('')+'</div><div class="col">'+ex.right.map(id=>chip('R',id,MAP[id].uk)).join('')+'</div></div>';
+  if(ex.done){ex.mist=[...ex.mist instanceof Set?ex.mist:new Set(ex.mist)];h+=resultHtml(ex.items.length-ex.mist.length,ex.items.length,true);}
+  return h;
+}
+function pairClick(side,id){
+  if(ex.matched.includes(id))return;
+  if(!ex.sel||ex.sel.side===side){ex.sel={side,id};}
+  else{
+    const a=ex.sel;ex.sel=null;
+    if(a.id===id){ex.matched.push(id);if(ex.matched.length===ex.items.length)ex.done=true;}
+    else{
+      ex.mist.add(side==='L'?id:a.id);ex.flash=[a.side+a.id,side+id];
+      setTimeout(()=>{if(ex&&ex.type==='pairs'){ex.flash=null;render();}},500);
+    }
+  }
+  render();
+}
+
+/* --- gap --- */
+function gapHtml(){
+  if(ex.done)return exHead(0,0)+resultHtml(ex.score,ex.items.length,true);
+  const c=ex.items[ex.i],cu=ex.cur,p=c.ex.split('___');
+  const w=Math.max(8,c.ans.length+3);
+  let h=exHead(ex.i+1,ex.items.length)+'<div class="qcard"><p class="exline">'+esc(p[0])+
+    '<input id="gapIn" class="gap '+(cu.checked?(cu.ok?'ok':'bad'):'')+'" style="width:'+w+'ch" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" aria-label="Пропущене слово" value="'+esc(cu.val)+'" '+(cu.checked?'readonly':'')+'>'+esc(p[1]||'')+'</p>'+
+    '<p class="note">Підказка: '+esc(c.uk)+'</p>';
+  if(!cu.checked){
+    h+='<div class="btnrow" style="margin-top:14px"><button class="btn primary" data-act="gapcheck" type="button">Перевірити</button><button class="sbtn" data-act="gaphint" type="button">Перша літера</button></div>';
+  }else{
+    h+='<div class="fb '+(cu.ok?'ok':'bad')+'">'+(cu.ok?'<b>Правильно.</b> ':'<b>Правильна відповідь: '+esc(c.ans)+'.</b> ')+
+      (c.col&&c.col.length?'<br><span class="muted">Ще: '+c.col.map(esc).join(' · ')+'</span>':'')+'</div>'+
+      '<div class="btnrow" style="margin-top:14px"><button class="btn primary" data-act="gapnext" type="button">'+(ex.i+1>=ex.items.length?'Результат':'Далі')+'</button></div>';
+  }
+  return h+'</div>';
+}
+function gapCheck(){
+  const c=ex.items[ex.i],inp=$('#gapIn');if(!inp||ex.cur.checked)return;
+  const v=inp.value;if(!v.trim()){inp.focus();return;}
+  ex.cur.val=v;ex.cur.checked=true;ex.cur.ok=norm(v)===norm(c.ans);
+  if(ex.cur.ok)ex.score++;else ex.mist.push(c.en);
+  render();
+}
+function nextIn(type,fresh){
+  ex.i++;
+  if(ex.i>=ex.items.length){ex.done=true;}else{ex.cur=fresh();}
+  render();
+}
+
+/* --- quiz --- */
+function quizHtml(){
+  if(ex.done)return exHead(0,0)+resultHtml(ex.score,ex.items.length,true);
+  const it=ex.items[ex.i],c=it.c,cu=ex.cur;
+  const q=it.dir==='de'?'<p class="q">'+esc(c.en)+'</p>':'<p class="q uk">'+esc(c.uk)+'</p>';
+  const opts=it.opts.map((o,i)=>{
+    let cls='';
+    if(cu.pick!==null){if(o.en===c.en)cls='ok';else if(i===cu.pick)cls='bad';}
+    return '<button class="opt '+cls+'" data-act="quizpick" data-i="'+i+'" '+(cu.pick!==null?'disabled':'')+' type="button">'+esc(it.dir==='de'?o.uk:o.en)+'</button>';
+  }).join('');
+  let h=exHead(ex.i+1,ex.items.length)+'<div class="qcard">'+(it.dir==='de'?'<div class="btnrow" style="justify-content:space-between;align-items:flex-start">'+q+spk(c)+'</div>':q)+'<div class="opts">'+opts+'</div>';
+  if(cu.pick!==null)h+='<div class="btnrow" style="margin-top:14px"><button class="btn primary" data-act="quiznext" type="button">'+(ex.i+1>=ex.items.length?'Результат':'Далі')+'</button></div>';
+  return h+'</div>';
+}
+
+/* --- dictation --- */
+function dictHtml(){
+  if(ex.done)return exHead(0,0)+resultHtml(ex.score,ex.items.length,true);
+  const c=ex.items[ex.i],cu=ex.cur;
+  const noTts=!('speechSynthesis' in window);
+  let h=exHead(ex.i+1,ex.items.length)+'<div class="qcard"><p class="q" style="font-size:22px">Прослухайте фразу й напишіть її німецькою.</p>'+
+    '<div class="btnrow"><button class="sbtn" data-act="dicplay" type="button">'+ICON+'<span>Слухати</span></button><button class="sbtn" data-act="dicslow" type="button">'+ICON+'<span>Повільніше</span></button></div>'+
+    (noTts?'<p class="note">У цьому браузері озвучка недоступна.</p>':'')+
+    '<div style="margin-top:14px"><input id="dicIn" class="dic '+(cu.checked?(cu.ok?'ok':'bad'):'')+'" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" aria-label="Ваша відповідь" value="'+esc(cu.val)+'" '+(cu.checked?'readonly':'')+'></div>';
+  if(!cu.checked)h+='<div class="btnrow" style="margin-top:14px"><button class="btn primary" data-act="diccheck" type="button">Перевірити</button></div>';
+  else h+='<div class="fb '+(cu.ok?'ok':'bad')+'">'+(cu.ok?'<b>Правильно.</b> ':'<b>Має бути: '+esc(c.en)+'</b> ')+'<br><span class="muted">'+esc(c.uk)+'</span></div>'+
+    '<div class="btnrow" style="margin-top:14px"><button class="btn primary" data-act="dicnext" type="button">'+(ex.i+1>=ex.items.length?'Результат':'Далі')+'</button></div>';
+  return h+'</div>';
+}
+
+/* --- forks --- */
+function forkCur(){
+  const f=ex.items[ex.i];
+  ex.cur={opts:shuffle(f.ok.map(t=>({t:t,ok:true})).concat(f.bad.map(t=>({t:t,ok:false})))),sel:[],checked:false,right:false};
+}
+function forksHtml(){
+  if(ex.done)return exHead(0,0)+'<div class="panel" style="margin-top:14px"><p class="bigtxt">Результат: '+ex.score+' з '+ex.items.length+'</p><p class="muted">Виделка зарахована, якщо обрано рівно всі потрібні слова.</p><div class="actcol"><button class="btn line" data-act="exagain" type="button">Ще раз</button><button class="btn line" data-act="exback" type="button">До вправ</button></div></div>';
+  const f=ex.items[ex.i],cu=ex.cur;
+  const opts=cu.opts.map((o,i)=>{
+    const on=cu.sel.includes(i);let cls=on?'sel':'';
+    if(cu.checked){if(o.ok&&on)cls='ok';else if(o.ok&&!on)cls='miss';else if(!o.ok&&on)cls='bad';else cls='';}
+    return '<button class="opt '+cls+'" data-act="forktoggle" data-i="'+i+'" '+(cu.checked?'disabled':'')+' aria-pressed="'+on+'" type="button">'+esc(o.t)+'</button>';
+  }).join('');
+  let h=exHead(ex.i+1,ex.items.length)+'<div class="qcard"><p class="note" style="margin:0 0 6px">Що поєднується зі словом? Оберіть усі підходящі.</p><p class="q">'+esc(f.word)+'</p><div class="opts">'+opts+'</div>';
+  if(!cu.checked)h+='<div class="btnrow" style="margin-top:14px"><button class="btn primary" data-act="forkcheck" type="button">Перевірити</button></div>';
+  else h+='<div class="fb '+(cu.right?'ok':'bad')+'"><b>'+(cu.right?'Правильно.':'Не зовсім.')+'</b> '+esc(f.why)+'</div><div class="btnrow" style="margin-top:14px"><button class="btn primary" data-act="forknext" type="button">'+(ex.i+1>=ex.items.length?'Результат':'Далі')+'</button></div>';
+  return h+'</div>';
+}
+
+/* --- sorts --- */
+function sortsHtml(){
+  const st=ex.set,placedKeys=Object.keys(ex.placed);
+  const correctOf=p=>{for(const k of ex.keys){if(st.cats[k].includes(p))return k;}return '';};
+  const poolItems=ex.pool.filter(p=>!(p in ex.placed));
+  const pill=(p,act,extra)=>'<button class="pill '+(ex.sel===p?'sel':'')+(extra&&extra.cls?' '+extra.cls:'')+'" data-act="'+act+'" data-p="'+esc(p)+'" type="button" '+(ex.checked?'disabled':'')+'>'+esc(p)+(extra&&extra.small?'<small>'+esc(extra.small)+'</small>':'')+'</button>';
+  let h=exHead(placedKeys.length+1,ex.pool.length+1)+'<div class="qcard"><p class="note" style="margin:0 0 4px">'+esc(st.title)+'</p><p class="note" style="margin:0">Торкніться фрази, потім групи.</p>'+
+    '<div class="pool">'+(poolItems.length?poolItems.map(p=>pill(p,'sortpick')).join(''):'<span class="note">Усі фрази розкладено.</span>')+'</div>'+
+    '<div class="groups">'+ex.keys.map((k,gi)=>{
+      const inG=placedKeys.filter(p=>ex.placed[p]===gi);
+      return '<div class="gbox '+(ex.sel&&!ex.checked?'armed':'')+'" data-act="sortplace" data-g="'+gi+'" role="button" tabindex="0"><h3>'+esc(k)+'</h3><div class="pool">'+
+        inG.map(p=>{
+          let ex2=null;
+          if(ex.checked){const okk=correctOf(p)===k;ex2=okk?{cls:'ok'}:{cls:'bad',small:'→ '+correctOf(p)};}
+          return pill(p,'sortunplace',ex2);
+        }).join('')+'</div></div>';
+    }).join('')+'</div>';
+  if(!ex.checked)h+='<div class="btnrow" style="margin-top:14px"><button class="btn primary" data-act="sortcheck" type="button" '+(poolItems.length?'disabled':'')+'>Перевірити</button></div>';
+  else{
+    const sc=ex.pool.length-ex.mist.length;
+    h+='<div class="fb '+(ex.mist.length?'bad':'ok')+'"><b>Результат: '+sc+' з '+ex.pool.length+'.</b> '+(ex.mist.length?'Біля неправильних фраз підписано, куди вони належать.':'Усе на своїх місцях.')+'</div>'+
+      '<div class="btnrow" style="margin-top:14px"><button class="btn primary" data-act="exagain" type="button">Ще раз</button><button class="btn line" data-act="exback" type="button">До вправ</button></div>';
+  }
+  return h+'</div>';
+}
+
+/* ================= RENDER: SETTINGS ================= */
+function settingsHtml(){
+  const vs=voices().sort((a,b)=>scoreV(b)-scoreV(a)),cur=bestVoice();
+  const cs=CARDS,seen=cs.filter(c=>getP(c.en).seen).length,ag=cs.filter(c=>getP(c.en).again).length;
+  const voiceBlock=vs.length
+    ?'<label class="fieldlbl" for="voiceSel">Голос</label><select id="voiceSel" class="field">'+vs.map(v=>'<option value="'+esc(v.voiceURI||v.name)+'" '+(cur&&cur.name===v.name&&cur.lang===v.lang?'selected':'')+'>'+(GOOD.test(v.name)?'★ ':'')+esc(v.name)+' ('+esc(v.lang)+')</option>').join('')+'</select>'+
+      '<div class="btnrow" style="margin-top:10px"><button class="sbtn" data-act="voicetest" type="button">'+ICON+'<span>Прослухати</span></button></div>'
+    :'<p class="note">Німецьких голосів у цьому браузері не знайдено. Спробуйте Safari або Chrome.</p>';
+  return '<div class="panel"><h2>Озвучка</h2><p class="note" style="margin-top:0">Кращі голоси позначені зірочкою.</p>'+voiceBlock+
+    '<p class="note">На iPhone: Налаштування → Універсальний доступ → Контент, що промовляється → Голоси → Німецька. Завантажте голос Enhanced або Premium, потім перезавантажте сторінку.</p></div>'+
+   '<div class="panel"><h2>Прогрес</h2><div class="stats"><div class="stat"><b>'+seen+'</b><span>бачено з '+cs.length+'</span></div><div class="stat"><b>'+(seen-ag)+'</b><span>знаю</span></div><div class="stat"><b>'+ag+'</b><span>повторити</span></div></div>'+
+    '<p class="note">Відкривайте сторінку завжди в одному браузері (Safari або Chrome), а не всередині Telegram чи Instagram: у кожному браузері прогрес зберігається окремо.</p>'+
+    '<div class="btnrow" style="margin-top:12px"><button class="sbtn" data-act="copycode" type="button">Скопіювати код прогресу</button></div>'+
+    (ui.codeOut?'<textarea id="codeOut" class="field" readonly aria-label="Код прогресу">'+esc(ui.codeOut)+'</textarea>':'')+
+    '<label class="fieldlbl" for="codeIn">Відновити з коду</label><textarea id="codeIn" class="field" placeholder="Вставте код, скопійований на іншому пристрої" spellcheck="false"></textarea>'+
+    '<div class="btnrow" style="margin-top:10px"><button class="sbtn" data-act="importcode" type="button">Відновити</button></div>'+
+    (ui.codeMsg?'<p class="note">'+esc(ui.codeMsg)+'</p>':'')+
+    '<div class="btnrow" style="margin-top:18px"><button class="sbtn '+(ui.resetArm?'danger':'')+'" data-act="reset" type="button">'+(ui.resetArm?'Натисніть ще раз, щоб скинути':'Скинути прогрес')+'</button></div></div>';
+}
+
+/* ================= MAIN RENDER ================= */
+function render(){
+  renderLessons();renderTabs();
+  const v=$('#view');
+  v.innerHTML=ui.tab==='cards'?cardsHtml():ui.tab==='ex'?exHtml():settingsHtml();
+  const f=$('#gapIn:not([readonly])')||$('#dicIn:not([readonly])');
+  if(f&&ui.tab==='ex'&&!f.dataset.noFocus)f.focus({preventScroll:true});
+}
+
+/* ================= EVENTS ================= */
+function encode(){
+  const s=JSON.stringify({v:1,prog:prog});const b=new TextEncoder().encode(s);let r='';b.forEach(x=>{r+=String.fromCharCode(x);});return 'OLGA1:'+btoa(r);
+}
+function decode(code){
+  code=code.trim();if(code.indexOf('OLGA1:')!==0)throw new Error('format');
+  const r=atob(code.slice(6));const b=Uint8Array.from(r,ch=>ch.charCodeAt(0));
+  const o=JSON.parse(new TextDecoder().decode(b));if(!o||typeof o.prog!=='object')throw new Error('format');
+  const out={};Object.keys(o.prog).forEach(k=>{const p=o.prog[k]||{};out[k]={lvl:+p.lvl||0,due:+p.due||0,again:!!p.again,seen:!!p.seen};});
+  return out;
+}
+function act(a,t){
+  switch(a){
+    case 'tab':ui.tab=t.dataset.v;render();break;
+    case 'theme':{const o=['auto','light','dark'],c=lsGet(K.theme)||'auto';lsSet(K.theme,o[(o.indexOf(c)+1)%3]);applyTheme();break;}
+    case 'lessonAll':S.lessons=null;saveS();ex=null;newSession(S.mode);render();break;
+    case 'lesson':{
+      const l=t.dataset.v,cur=sel(),all=cur.length===LESSONS.length;let n;
+      if(all&&LESSONS.length>1)n=[l];else if(cur.includes(l))n=cur.filter(x=>x!==l);else n=cur.concat([l]);
+      if(!n.length)n=LESSONS.slice();
+      S.lessons=n;saveS();ex=null;newSession(S.mode);render();break;
+    }
+    case 'mode':S.mode=t.dataset.v;saveS();ui.tab='cards';newSession(S.mode);render();break;
+    case 'random':S.random=!S.random;saveS();newSession(S.mode);render();break;
+    case 'rev':S.rev=!S.rev;saveS();ui.flipped=false;ui.revealed=false;render();break;
+    case 'restart':{ensureSession();const ids=S.random?shuffle(sess.ids):sess.ids.slice();newSession(S.mode,ids,sess.custom);render();break;}
+    case 'know':answer('know');break;
+    case 'again':answer('again');break;
+    case 'reveal':ui.revealed=!ui.revealed;render();break;
+    case 'speak':{const c=CARDS[+t.dataset.k];if(c)speak(sayText(c));break;}
+    case 'againWords':{const ids=sess.ids.filter(i=>sess.res[i]==='again');newSession(S.mode,ids,true);render();break;}
+    case 'more':newSession(S.mode);render();break;
+    case 'toex':ui.tab='ex';ex=null;render();break;
+    /* exercises */
+    case 'src':ui.exSrc=t.dataset.v;render();break;
+    case 'exstart':startEx(t.dataset.v);break;
+    case 'exback':ex=null;render();break;
+    case 'exagain':{const ty=ex.type;startEx(ty);break;}
+    case 'exadd':{(ex.mist instanceof Set?[...ex.mist]:ex.mist).forEach(en=>mark(en,'again'));ex.added=true;toast('Слова додано в повторення');render();break;}
+    case 'pair':pairClick(t.dataset.side,t.dataset.id);break;
+    case 'gaphint':{const c=ex.items[ex.i],inp=$('#gapIn');if(inp&&!ex.cur.checked){if(!inp.value)inp.value=c.ans.charAt(0);ex.cur.hint=true;inp.focus();}break;}
+    case 'gapcheck':gapCheck();break;
+    case 'gapnext':nextIn('gap',()=>({checked:false,ok:false,hint:false,val:''}));break;
+    case 'quizpick':{const cu=ex.cur;if(cu.pick!==null)break;const it=ex.items[ex.i];cu.pick=+t.dataset.i;
+      if(it.opts[cu.pick].en===it.c.en)ex.score++;else ex.mist.push(it.c.en);render();break;}
+    case 'quiznext':nextIn('quiz',()=>({pick:null}));break;
+    case 'dicplay':speak(sayText(ex.items[ex.i]),0.95);break;
+    case 'dicslow':speak(sayText(ex.items[ex.i]),0.55);break;
+    case 'diccheck':{const c=ex.items[ex.i],inp=$('#dicIn');if(!inp||ex.cur.checked)break;
+      if(!inp.value.trim()){inp.focus();break;}
+      ex.cur.val=inp.value;ex.cur.checked=true;ex.cur.ok=norm(inp.value)===norm(c.en);
+      if(ex.cur.ok)ex.score++;else ex.mist.push(c.en);render();break;}
+    case 'dicnext':nextIn('dict',()=>({checked:false,ok:false,val:''}));break;
+    case 'forktoggle':{const cu=ex.cur;if(cu.checked)break;const i=+t.dataset.i,p=cu.sel.indexOf(i);if(p>=0)cu.sel.splice(p,1);else cu.sel.push(i);render();break;}
+    case 'forkcheck':{const cu=ex.cur;cu.checked=true;
+      cu.right=cu.opts.every((o,i)=>o.ok===cu.sel.includes(i));if(cu.right)ex.score++;render();break;}
+    case 'forknext':nextIn('forks',()=>{forkCur();return ex.cur;});break;
+    case 'sortpick':ex.sel=ex.sel===t.dataset.p?null:t.dataset.p;render();break;
+    case 'sortplace':if(ex.sel&&!ex.checked){ex.placed[ex.sel]=+t.dataset.g;ex.sel=null;render();}break;
+    case 'sortunplace':if(!ex.checked){delete ex.placed[t.dataset.p];ex.sel=null;render();}break;
+    case 'sortcheck':{ex.checked=true;ex.mist=[];
+      ex.pool.forEach(p=>{const g=ex.placed[p];if(!ex.set.cats[ex.keys[g]].includes(p))ex.mist.push(p);});render();break;}
+    /* settings */
+    case 'voicetest':speak('Der Mundspiegel liegt auf dem Instrumententablett.');break;
+    case 'copycode':{
+      const code=encode();ui.codeOut='';
+      const fallback=()=>{ui.codeOut=code;ui.codeMsg='Скопіюйте код вручну з поля вище.';render();const o=$('#codeOut');if(o){o.focus();o.select();}};
+      try{navigator.clipboard.writeText(code).then(()=>{ui.codeMsg='Код скопійовано. Вставте його на іншому пристрої.';render();},fallback);}catch(e){fallback();}
+      break;}
+    case 'importcode':{
+      const v=($('#codeIn')||{}).value||'';
+      try{prog=decode(v);save(K.prog,prog);sess=null;save(K.sess,null);ui.codeMsg='Прогрес відновлено.';ui.codeOut='';}
+      catch(e){ui.codeMsg='Не вдалося прочитати код. Скопіюйте його повністю, разом із початком OLGA1:.';}
+      render();break;}
+    case 'reset':
+      if(!ui.resetArm){ui.resetArm=true;render();clearTimeout(act.rt);act.rt=setTimeout(()=>{ui.resetArm=false;if(ui.tab==='set')render();},4000);}
+      else{ui.resetArm=false;prog={};save(K.prog,prog);sess=null;save(K.sess,null);ex=null;ui.codeMsg='Прогрес скинуто.';ui.codeOut='';render();}
+      break;
+  }
+}
+document.addEventListener('click',e=>{
+  const t=e.target.closest('[data-act]');
+  if(t){act(t.dataset.act,t);return;}
+  if(e.target.closest('a'))return;
+  if(e.target.closest('#card')){ui.flipped=!ui.flipped;const c=$('#card');if(c)c.classList.toggle('flipped',ui.flipped);}
+});
+document.addEventListener('change',e=>{
+  if(e.target&&e.target.id==='voiceSel'){S.voice=e.target.value;saveS();speak('Der Mundspiegel liegt auf dem Instrumententablett.');}
+});
+document.addEventListener('keydown',e=>{
+  const tag=(e.target.tagName||'').toLowerCase();
+  if(e.key==='Enter'&&tag==='input'){
+    if(e.target.id==='gapIn'){e.preventDefault();gapCheck();}
+    else if(e.target.id==='dicIn'){e.preventDefault();act('diccheck',e.target);}
+    return;
+  }
+  if(tag==='input'||tag==='textarea'||tag==='select')return;
+  if(ui.tab==='ex'&&ex&&ex.type==='sorts'&&(e.key==='Enter'||e.key===' ')&&e.target.classList&&e.target.classList.contains('gbox')){e.preventDefault();act('sortplace',e.target);return;}
+  if(ui.tab!=='cards'||!$('#card'))return;
+  if(e.key===' '){e.preventDefault();ui.flipped=!ui.flipped;$('#card').classList.toggle('flipped',ui.flipped);}
+  else if(e.key==='ArrowLeft'){e.preventDefault();answer('again');}
+  else if(e.key==='ArrowRight'){e.preventDefault();answer('know');}
+  else if(e.key==='Enter'&&e.target.id==='card'){e.preventDefault();ui.flipped=!ui.flipped;$('#card').classList.toggle('flipped',ui.flipped);}
+});
+
+applyTheme();
+render();
+})();
+</script>
+
+</body></html>
