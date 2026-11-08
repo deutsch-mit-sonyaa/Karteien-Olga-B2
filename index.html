@@ -193,6 +193,16 @@ h2,.bigtxt,.trans,.q,.exbtn b,.pchip.de,.pill{font-weight:600}
 .blank,.gap,.dic{background:var(--tea);color:var(--tea-ink);border-bottom-color:var(--accent)}
 .opt.sel,.pchip.sel,.pill.sel,.gbox.armed{background:var(--tea);color:var(--tea-ink)}
 .list li{background:var(--surface-2)}
+.writebox{display:grid;gap:8px;width:100%;margin-top:6px}
+.wlbl{font-size:13px;font-weight:700;color:var(--muted)}
+.wrow{display:flex;gap:8px;align-items:stretch}
+.wrow .field{flex:1;min-width:0;font-size:16px}
+.writein.ok{border-color:var(--ok);background:var(--ok-soft)}
+.writein.bad{border-color:var(--bad);background:var(--bad-soft)}
+.wskip{justify-self:start;background:none;border:0;padding:6px 0;color:var(--muted);font:600 13px var(--font-body);text-decoration:underline}
+.fb.part{background:var(--surface-2)}
+.wans{font:700 20px var(--font-display);margin-left:4px}
+.writebox .fb{margin-top:0}
 </style>
 
 <div class="wrap">
@@ -570,7 +580,34 @@ const CARDS = [
   col:['die Bauchspeicheldrüse produziert','eine Entzündung der Bauchspeicheldrüse'], dict:'Bauchspeicheldrüse'},
  {lesson:'Verdauung und Zähne', en:'die Leber', uk:'печінка',
   ex:'Die ___ bildet Galle, die bei der Fettverdauung hilft.', ans:'Leber',
-  col:['die Leber entgiftet','die Leber produziert Galle'], dict:'Leber'}
+  col:['die Leber entgiftet','die Leber produziert Galle'], dict:'Leber'},
+ {lesson:'Verdauung und Zähne', en:'das Organ', uk:'орган',
+  ex:'Die Leber ist ein wichtiges ___ im Bauchraum.', ans:'Organ',
+  col:['ein wichtiges Organ','ein inneres Organ','die inneren Organe'], dict:'Organ'},
+ {lesson:'Verdauung und Zähne', en:'der Organismus', uk:'організм',
+  ex:'Der gesamte ___ braucht Nährstoffe, um richtig zu funktionieren.', ans:'Organismus',
+  col:['der menschliche Organismus','den Organismus belasten'], dict:'Organismus'},
+ {lesson:'Verdauung und Zähne', en:'das längste Organ', uk:'найдовший орган',
+  ex:'Der Dünndarm ist das ___ Organ des Verdauungstrakts.', ans:'längste',
+  col:['das längste Organ','das größte Organ','das wichtigste Organ'], dict:'lang'},
+ {lesson:'Verdauung und Zähne', en:'entgiften', uk:'виводити токсини, знешкоджувати',
+  ex:'Die Leber hilft dabei, den Körper zu ___.', ans:'entgiften',
+  col:['den Körper entgiften','Giftstoffe abbauen'], dict:'entgiften'},
+ {lesson:'Verdauung und Zähne', en:'zerkleinern', uk:'подрібнювати',
+  ex:'Beim Kauen ___ die Zähne die Nahrung in kleine Stücke.', ans:'zerkleinern',
+  col:['die Nahrung zerkleinern','etwas fein zerkleinern'], dict:'zerkleinern'},
+ {lesson:'Verdauung und Zähne', en:'die Speicheldrüsen', uk:'слинні залози',
+  ex:'Die ___ bilden den Speichel.', ans:'Speicheldrüsen',
+  col:['die Speicheldrüsen produzieren Speichel','die Speicheldrüsen anregen'], dict:'Speicheldrüse'},
+ {lesson:'Verdauung und Zähne', en:'der Rachen', uk:'глотка',
+  ex:'Beim Schlucken gelangt der Bissen vom Mund in den ___.', ans:'Rachen',
+  col:['Schmerzen im Rachen','den Rachen untersuchen'], dict:'Rachen'},
+ {lesson:'Verdauung und Zähne', en:'die Gallenblase', uk:'жовчний міхур',
+  ex:'In der ___ wird die Galle gespeichert.', ans:'Gallenblase',
+  col:['die Galle speichern','die Gallenblase entfernen'], dict:'Gallenblase'},
+ {lesson:'Verdauung und Zähne', en:'enthalten', uk:'містити',
+  ex:'Der Speichel ___ Enzyme, die Stärke aufspalten.', ans:'enthält',
+  col:['Enzyme enthalten','im Speichel enthalten sein'], dict:'enthalten'}
 ];
 
 /* Виделки: ok — що поєднується, bad — зайве */
@@ -659,10 +696,10 @@ const SORTS = [
    'Gespräch und Gewohnheiten':['eine harmlose Angewohnheit','auf solche Gewohnheiten ansprechen','Mit genug Willenskraft','ernst genommen werden','jemanden an etwas hindern']
  }},
  {lesson:'Verdauung und Zähne', title:'Wo findet die Verdauung statt?', cats:{
-   'Mund und Speiseröhre':['der Speichel','die Speiseröhre'],
+   'Mund und Speiseröhre':['der Speichel','die Speiseröhre','die Speicheldrüsen','der Rachen'],
    'Magen':['der Magen','der Speisebrei'],
-   'Darm und Organe':['der Darm','der Dünndarm','der Dickdarm','die Bauchspeicheldrüse','die Leber'],
-   'Prozess und Stoffe':['die Verdauung','der Magen-Darm-Trakt','die Verdauungssäfte','die Verdauungsenzyme','in Gang setzen','die Nährstoffe']
+   'Darm und Organe':['der Darm','der Dünndarm','der Dickdarm','die Bauchspeicheldrüse','die Leber','die Gallenblase','das Organ','das längste Organ'],
+   'Prozess und Stoffe':['die Verdauung','der Magen-Darm-Trakt','die Verdauungssäfte','die Verdauungsenzyme','in Gang setzen','die Nährstoffe','der Organismus','zerkleinern','entgiften','enthalten']
  }}
 ];
 
@@ -699,7 +736,7 @@ function mark(en,kind){
 }
 
 /* ================= STATE ================= */
-const ui={tab:'cards',flipped:false,revealed:false,exSrc:'all',resetArm:false,codeMsg:'',codeOut:''};
+const ui={tab:'cards',flipped:false,revealed:false,wval:'',wstate:null,exSrc:'all',resetArm:false,codeMsg:'',codeOut:''};
 let ex=null;
 
 /* ================= VOICE ================= */
@@ -737,9 +774,10 @@ function buildIds(mode){
   else list=mix(C);
   return list.map(c=>c.en);
 }
+function resetCardUi(){ui.flipped=false;ui.revealed=false;ui.wval='';ui.wstate=null;}
 function newSession(mode,ids,custom){
   sess={mode:mode,lessons:sel().join('|'),ids:ids||buildIds(mode),idx:0,res:{},custom:!!custom};
-  save(K.sess,sess);ui.flipped=false;ui.revealed=false;
+  save(K.sess,sess);resetCardUi();
 }
 function ensureSession(){
   if(!sess||!Array.isArray(sess.ids)||sess.mode!==S.mode||sess.lessons!==sel().join('|')||!sess.ids.every(id=>MAP[id]))newSession(S.mode);
@@ -748,7 +786,7 @@ function answer(kind){
   ensureSession();
   const id=sess.ids[sess.idx];if(!id)return;
   mark(id,kind);sess.res[id]=kind;sess.idx++;
-  ui.flipped=false;ui.revealed=false;save(K.sess,sess);render();
+  resetCardUi();save(K.sess,sess);render();
 }
 
 /* ================= RENDER: CHROME ================= */
@@ -784,12 +822,30 @@ function frontHtml(c){
     '<div class="mid">'+(S.rev?'<p class="phrase uk">'+esc(c.uk)+'</p><p class="hintline">Як це німецькою?</p>':'<p class="phrase">'+esc(c.en)+'</p>')+'</div>'+
     '<p class="flipnote">Торкніться, щоб перевернути</p></div>';
 }
+const ART=/^(der|die|das)\s+/i;
+function writeHtml(c){
+  const st=ui.wstate;
+  let h='<div class="writebox"><label class="wlbl" for="cardIn">Напишіть слово німецькою</label>'+
+    '<div class="wrow"><input id="cardIn" class="field writein'+(st==='ok'?' ok':st==='bad'||st==='part'?' bad':'')+'" type="text" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" aria-label="Слово німецькою" value="'+esc(ui.wval)+'"'+(st?' readonly':'')+'>'+
+    (st?'':'<button class="sbtn" data-act="wcheck" type="button">Перевірити</button>')+'</div>';
+  if(!st)h+='<button class="wskip" data-act="wshow" type="button">Показати слово</button>';
+  else{
+    const msg={ok:'<b>Правильно.</b>',part:'<b>Майже.</b> Не забудьте артикль:',bad:'<b>Не зовсім.</b> Правильно:',shown:'Слово:'}[st];
+    h+='<div class="fb '+(st==='ok'?'ok':st==='shown'?'part':'bad')+'">'+msg+' <span class="wans">'+esc(c.en)+'</span></div>';
+  }
+  return h+'</div>';
+}
 function backHtml(c){
-  const main=S.rev?'<p class="phrase sm">'+esc(c.en)+'</p><p class="trans sm">'+esc(c.uk)+'</p>'
-                   :'<p class="small">'+esc(c.en)+'</p><p class="trans">'+esc(c.uk)+'</p>';
   return '<div class="face back"><div class="head"><span class="tag">'+esc(c.lesson)+'</span></div>'+
-    '<div class="mid left">'+main+'<p class="ex">'+sentenceHtml(c)+'</p></div>'+
+    '<div class="mid left"><p class="trans">'+esc(c.uk)+'</p><p class="ex">'+sentenceHtml(c)+'</p>'+writeHtml(c)+'</div>'+
     '<div class="btnrow">'+spk(c,true)+'<a class="sbtn" href="https://www.duden.de/suchen/dudenonline/'+encodeURIComponent(c.dict||c.en)+'" target="_blank" rel="noopener">Duden</a></div></div>';
+}
+function cardCheck(){
+  if(!sess||!sess.ids)return;
+  const c=MAP[sess.ids[sess.idx]],inp=$('#cardIn');if(!c||!inp||ui.wstate)return;
+  const v=inp.value;if(!v.trim()){inp.focus();return;}
+  ui.wval=v;const a=norm(v),b=norm(c.en),b2=norm(c.en.replace(ART,''));
+  ui.wstate=a===b?'ok':(b2!==b&&a===b2?'part':'bad');render();
 }
 function cardsHtml(){
   ensureSession();
@@ -1073,11 +1129,13 @@ function act(a,t){
     }
     case 'mode':S.mode=t.dataset.v;saveS();ui.tab='cards';newSession(S.mode);render();break;
     case 'random':S.random=!S.random;saveS();newSession(S.mode);render();break;
-    case 'rev':S.rev=!S.rev;saveS();ui.flipped=false;ui.revealed=false;render();break;
+    case 'rev':S.rev=!S.rev;saveS();resetCardUi();render();break;
     case 'restart':{ensureSession();const ids=S.random?shuffle(sess.ids):sess.ids.slice();newSession(S.mode,ids,sess.custom);render();break;}
     case 'know':answer('know');break;
     case 'again':answer('again');break;
     case 'reveal':ui.revealed=!ui.revealed;render();break;
+    case 'wcheck':cardCheck();break;
+    case 'wshow':ui.wstate='shown';render();break;
     case 'speak':{const c=CARDS[+t.dataset.k];if(c)speak(sayText(c));break;}
     case 'againWords':{const ids=sess.ids.filter(i=>sess.res[i]==='again');newSession(S.mode,ids,true);render();break;}
     case 'more':newSession(S.mode);render();break;
@@ -1132,9 +1190,10 @@ function act(a,t){
 document.addEventListener('click',e=>{
   const t=e.target.closest('[data-act]');
   if(t){act(t.dataset.act,t);return;}
-  if(e.target.closest('a'))return;
+  if(e.target.closest('a')||e.target.closest('.writebox'))return;
   if(e.target.closest('#card')){ui.flipped=!ui.flipped;const c=$('#card');if(c)c.classList.toggle('flipped',ui.flipped);}
 });
+document.addEventListener('input',e=>{if(e.target&&e.target.id==='cardIn')ui.wval=e.target.value;});
 document.addEventListener('change',e=>{
   if(e.target&&e.target.id==='voiceSel'){S.voice=e.target.value;saveS();speak('Der Mundspiegel liegt auf dem Instrumententablett.');}
 });
@@ -1143,6 +1202,7 @@ document.addEventListener('keydown',e=>{
   if(e.key==='Enter'&&tag==='input'){
     if(e.target.id==='gapIn'){e.preventDefault();gapCheck();}
     else if(e.target.id==='dicIn'){e.preventDefault();act('diccheck',e.target);}
+    else if(e.target.id==='cardIn'){e.preventDefault();cardCheck();}
     return;
   }
   if(tag==='input'||tag==='textarea'||tag==='select')return;
