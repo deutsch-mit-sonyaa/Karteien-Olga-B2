@@ -607,7 +607,50 @@ const CARDS = [
   col:['die Galle speichern','die Gallenblase entfernen'], dict:'Gallenblase'},
  {lesson:'Verdauung und Zähne', en:'enthalten', uk:'містити',
   ex:'Der Speichel ___ Enzyme, die Stärke aufspalten.', ans:'enthält',
-  col:['Enzyme enthalten','im Speichel enthalten sein'], dict:'enthalten'}
+  col:['Enzyme enthalten','im Speichel enthalten sein'], dict:'enthalten'},
+ /* ---- Zahnarten ---- */
+ {lesson:'Zahnarten', en:'die Schneidezähne', uk:'різці',
+  ex:'Mit den ___ beißt man ein Stück vom Apfel ab.', ans:'Schneidezähne',
+  col:['die oberen Schneidezähne','die Schneidezähne putzen'], dict:'Schneidezahn'},
+ {lesson:'Zahnarten', en:'die Eckzähne', uk:'ікла',
+  ex:'Die spitzen ___ halten die Nahrung fest und reißen sie.', ans:'Eckzähne',
+  col:['spitze Eckzähne','den Eckzahn ziehen'], dict:'Eckzahn'},
+ {lesson:'Zahnarten', en:'die Backzähne', uk:'кутні зуби (премоляри й моляри)',
+  ex:'Mit den ___ zermahlt man die Nahrung.', ans:'Backzähne',
+  col:['die hinteren Backzähne','einen Backzahn füllen'], dict:'Backenzahn'},
+ {lesson:'Zahnarten', en:'die Prämolaren', uk:'премоляри (малі кутні зуби)',
+  ex:'Die ___ liegen zwischen den Eckzähnen und den Molaren.', ans:'Prämolaren',
+  col:['die oberen Prämolaren','einen Prämolaren überkronen'], dict:'Prämolar'},
+ {lesson:'Zahnarten', en:'die Molaren', uk:'моляри (великі кутні зуби)',
+  ex:'Die ___ haben eine große Kaufläche und mehrere Wurzeln.', ans:'Molaren',
+  col:['die großen Molaren','die Molaren zermahlen'], dict:'Molar'},
+ {lesson:'Zahnarten', en:'feste Nahrung weich kauen', uk:'розжовувати тверду їжу до м’якого стану',
+  ex:'Mit den Backzähnen kann man feste Nahrung weich ___.', ans:'kauen',
+  col:['feste Nahrung','gründlich kauen'], dict:'kauen'},
+ {lesson:'Zahnarten', en:'mit festen Fasern verankert sein', uk:'бути закріпленим міцними волокнами',
+  ex:'Der Zahn ist mit festen Fasern im Kieferknochen ___.', ans:'verankert',
+  col:['im Knochen verankert sein','fest verankert sein'], dict:'verankern'},
+ {lesson:'Zahnarten', en:'sich schieben', uk:'зсуватися, посуватися',
+  ex:'Wenn ein Zahn fehlt, ___ sich die Nachbarzähne in die Lücke.', ans:'schieben',
+  col:['sich in die Lücke schieben','sich nach vorn schieben'], dict:'schieben'},
+ {lesson:'Zahnarten', en:'Der Zahn bricht durch.', uk:'Зуб прорізується.',
+  ex:'Bei Babys ___ der erste Zahn mit etwa sechs Monaten durch.', ans:'bricht',
+  col:['der erste Zahn bricht durch','die Weisheitszähne brechen durch'], dict:'durchbrechen'},
+ {lesson:'Zahnarten', en:'allmählich ausfallen', uk:'поступово випадати',
+  ex:'Die Milchzähne fallen ___ aus.', ans:'allmählich',
+  col:['die Milchzähne fallen aus','allmählich ausfallen'], dict:'allmählich'},
+ {lesson:'Zahnarten', en:'der Schädel', uk:'череп',
+  ex:'Der Oberkiefer ist fest mit dem ___ verbunden.', ans:'Schädel',
+  col:['der Schädelknochen','ein Schädelbruch'], dict:'Schädel'},
+ {lesson:'Zahnarten', en:'die Kiefergelenke', uk:'скронево-нижньощелепні суглоби',
+  ex:'Beim Öffnen des Mundes bewegen sich beide ___.', ans:'Kiefergelenke',
+  col:['die Kiefergelenke belasten','Schmerzen in den Kiefergelenken'], dict:'Kiefergelenk'},
+ {lesson:'Zahnarten', en:'der Schläfenknochen', uk:'скронева кістка',
+  ex:'Das Kiefergelenk sitzt am ___ des Schädels.', ans:'Schläfenknochen',
+  col:['am Schläfenknochen','der Schläfenknochen des Schädels'], dict:'Schläfenbein'},
+ {lesson:'Zahnarten', en:'sich anspannen', uk:'напружуватися',
+  ex:'Beim Zubeißen ___ sich die Kaumuskeln an.', ans:'spannen',
+  col:['die Muskeln spannen sich an','sich vor Angst anspannen'], dict:'anspannen'}
 ];
 
 /* Виделки: ok — що поєднується, bad — зайве */
@@ -665,7 +708,13 @@ const FORKS = [
   why:'Харчові речовини всмоктують, засвоюють і передають у кров. «Erleiden» вживають про втрату чи шкоду.'},
  {lesson:'Verdauung und Zähne', word:'schlucken',
   ok:['die Nahrung','den Bissen','eine Tablette'], bad:['den Magen'],
-  why:'Ковтають їжу, шматок, пігулку. Шлунок (Magen) — це місце, куди вона потрапляє, а не те, що ковтають.'}
+  why:'Ковтають їжу, шматок, пігулку. Шлунок (Magen) — це місце, куди вона потрапляє, а не те, що ковтають.'},
+ {lesson:'Zahnarten', word:'der Zahn',
+  ok:['Der Zahn bricht durch.','Der Zahn fällt aus.','Der Zahn ist im Kiefer verankert.'], bad:['Der Zahn spannt sich an.'],
+  why:'Зуб прорізується, випадає й тримається в щелепі. «Sich anspannen» кажуть про м’язи, а не про зуб.'},
+ {lesson:'Zahnarten', word:'kauen',
+  ok:['feste Nahrung','ein Brötchen','Kaugummi'], bad:['der Schädel'],
+  why:'Жують їжу, булочку, жуйку. Череп (Schädel) — це кістка, її не жують.'}
 ];
 
 /* Категорії: кожна фраза (поле en) — лише в одній групі */
@@ -700,6 +749,12 @@ const SORTS = [
    'Magen':['der Magen','der Speisebrei'],
    'Darm und Organe':['der Darm','der Dünndarm','der Dickdarm','die Bauchspeicheldrüse','die Leber','die Gallenblase','das Organ','das längste Organ'],
    'Prozess und Stoffe':['die Verdauung','der Magen-Darm-Trakt','die Verdauungssäfte','die Verdauungsenzyme','in Gang setzen','die Nährstoffe','der Organismus','zerkleinern','entgiften','enthalten']
+ }},
+ {lesson:'Zahnarten', title:'Wozu gehört der Ausdruck?', cats:{
+   'Zahnarten':['die Schneidezähne','die Eckzähne','die Backzähne','die Prämolaren','die Molaren'],
+   'Schädel und Kiefer':['der Schädel','die Kiefergelenke','der Schläfenknochen'],
+   'Kauen und Halt':['feste Nahrung weich kauen','mit festen Fasern verankert sein'],
+   'Bewegung und Wechsel':['sich schieben','Der Zahn bricht durch.','allmählich ausfallen','sich anspannen']
  }}
 ];
 
